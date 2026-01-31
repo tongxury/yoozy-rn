@@ -2,10 +2,10 @@ import { ConfigContext, ExpoConfig } from "@expo/config";
 
 const config = ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
-  name: "予之",
-  slug: "yoozy-cbn4rtgddfys-lbvlkdpi",
-  version: "2.0.11",
-  runtimeVersion: "2.0.11",
+  name: "Inhot",
+  slug: "yoozy",
+  version: "2.0.261",
+  runtimeVersion: "2.0.261",
   orientation: "portrait",
   icon: "./src/assets/images/app_icon.png",
   scheme: "yoozyapp",
@@ -62,11 +62,11 @@ const config = ({ config }: ConfigContext): ExpoConfig => ({
     ENV: process.env.ENV || "development", // 对应 eas.json中的ENV
     router: {},
     eas: {
-      projectId: "04f85269-b343-4c8e-8dc1-ca6704b3bac5",
+      projectId: "7d163000-f0fc-4be3-8e7c-7a1c7c2e41b0",
     },
   },
   updates: {
-    url: "https://u.expo.dev/04f85269-b343-4c8e-8dc1-ca6704b3bac5",
+    url: "https://u.expo.dev/7d163000-f0fc-4be3-8e7c-7a1c7c2e41b0",
   },
 });
 

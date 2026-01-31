@@ -67,7 +67,7 @@ export default function LoginScreen() {
     loginType === "email" ? isEmailLoginSuccess : isPhoneLoginSuccess;
   const isLoginError =
     loginType === "email" ? isEmailLoginError : isPhoneLoginError;
-    
+
   const {
     mutate: sendEmailCode,
     isPending: isSendEmailPending,
@@ -88,7 +88,7 @@ export default function LoginScreen() {
     loginType === "email" ? isSendEmailSuccess : isSendPhoneSuccess;
   const isSendCodeError =
     loginType === "email" ? isSendEmailError : isSendPhoneError;
-    
+
   const loginForm = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -203,7 +203,7 @@ export default function LoginScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-background">
-      <KeyboardAvoidingView 
+      <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         className="flex-1"
       >
@@ -218,7 +218,7 @@ export default function LoginScreen() {
           </TouchableOpacity>
         </View>
 
-        <ScrollView 
+        <ScrollView
           className="flex-1 px-6"
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingTop: 40, paddingBottom: 40 }}
@@ -312,20 +312,18 @@ export default function LoginScreen() {
                           ? !isEmailValid() || countdown > 0
                           : !isPhoneValid() || countdown > 0
                       }
-                      className={`px-5 h-14 rounded-2xl items-center justify-center ${
-                        (loginType === "email" ? isEmailValid() : isPhoneValid()) && countdown === 0
+                      className={`px-5 h-14 rounded-2xl items-center justify-center ${(loginType === "email" ? isEmailValid() : isPhoneValid()) && countdown === 0
                           ? "bg-primary"
                           : "bg-primary/20"
-                      }`}
+                        }`}
                     >
                       {isSendCodePending ? (
                         <ActivityIndicator color={colors.card} size="small" />
                       ) : (
-                        <Text className={`font-bold ${
-                          (loginType === "email" ? isEmailValid() : isPhoneValid()) && countdown === 0
+                        <Text className={`font-bold ${(loginType === "email" ? isEmailValid() : isPhoneValid()) && countdown === 0
                             ? "text-white"
                             : "text-primary"
-                        }`}>
+                          }`}>
                           {countdown > 0
                             ? `${countdown}s`
                             : t("getCode")}
@@ -340,14 +338,13 @@ export default function LoginScreen() {
           </View>
 
           {/* Terms Agreement */}
-          <TouchableOpacity 
+          <TouchableOpacity
             onPress={() => setIsAgreed(!isAgreed)}
             activeOpacity={0.8}
             className="flex-row items-start mt-8 px-1"
           >
-            <View className={`w-5 h-5 rounded-full border-2 items-center justify-center mt-0.5 ${
-              isAgreed ? "bg-primary border-primary" : "border-muted-foreground/30"
-            }`}>
+            <View className={`w-5 h-5 rounded-full border-2 items-center justify-center mt-0.5 ${isAgreed ? "bg-primary border-primary" : "border-muted-foreground/30"
+              }`}>
               {isAgreed && <Ionicons name="checkmark" size={12} color="white" />}
             </View>
             <View className="flex-1 ml-3">
@@ -364,9 +361,8 @@ export default function LoginScreen() {
           <TouchableOpacity
             onPress={loginForm.handleSubmit(submit)}
             disabled={!buttonEnabled() || isLoginPending}
-            className={`h-14 rounded-2xl items-center justify-center mt-10 shadow-lg shadow-primary/20 ${
-              buttonEnabled() ? "bg-primary" : "bg-primary/40"
-            }`}
+            className={`h-14 rounded-2xl items-center justify-center mt-10 shadow-lg shadow-primary/20 ${buttonEnabled() ? "bg-primary" : "bg-primary/40"
+              }`}
           >
             {isLoginPending ? (
               <ActivityIndicator color="white" />
@@ -377,8 +373,7 @@ export default function LoginScreen() {
             )}
           </TouchableOpacity>
 
-          {/* Other Login Methods */}
-          {Platform.OS === "ios" && (
+          {/* {Platform.OS === "ios" && (
             <View className="mt-16">
               <View className="flex-row items-center mb-8">
                 <View className="flex-1 h-[1px] bg-muted-foreground/10" />
@@ -389,7 +384,7 @@ export default function LoginScreen() {
                 <AppleLogin onSuccess={onLoginSuccess} />
               </View>
             </View>
-          )}
+          )} */}
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
