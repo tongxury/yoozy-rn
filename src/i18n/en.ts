@@ -400,9 +400,9 @@ export default {
 
   // FAQ Page
   faqTitle: "Frequently Asked Questions",
-  faqQuestion1: "What is VeoGo AI?",
+  faqQuestion1: "What is yoozy.ai?",
   faqAnswer1:
-    "VeoGo AI is an intelligent prediction tool for short video creators, using deep learning algorithms to predict video traffic performance in advance and provide second-level optimization suggestions, helping to improve video exposure and click-through rates.",
+    "yoozy.ai is an intelligent prediction tool for short video creators, using deep learning algorithms to predict video traffic performance in advance and provide second-level optimization suggestions, helping to improve video exposure and click-through rates.",
   faqQuestion2: "What is the technical principle of the prediction algorithm?",
   faqAnswer2:
     "Based on deep neural networks and computer vision technology, combined with platform traffic rules to establish multi-dimensional prediction models, continuously optimizing confidence through real-time data feedback (current prediction accuracy >92%).",
@@ -422,15 +422,15 @@ export default {
 
   // Contact Page
   contactQRText: "Scan the QR code above to add customer service on WeChat",
-  contactEmail: "Email: support@veogo.ai",
+  contactEmail: "Email: support@yoozy.ai",
 
   // About Page
-  aboutAppTitle: "VeoGo AI",
+  aboutAppTitle: "yoozy.ai",
   aboutSubtitle:
     "Empowering creators, foreseeing the viral potential of every frame",
   aboutUsSection: "About Us",
   aboutUsContent:
-    "VeoGo AI is an intelligent decision engine built specifically for short video creators. Based on cutting-edge deep learning algorithms and multimodal AI technology, it helps you accurately predict traffic performance before video release and optimize content details, making every second of creation point toward 'viral success'.",
+    "yoozy.ai is an intelligent decision engine built specifically for short video creators. Based on cutting-edge deep learning algorithms and multimodal AI technology, it helps you accurately predict traffic performance before video release and optimize content details, making every second of creation point toward 'viral success'.",
   precisionPrediction: "Precision Prediction",
   precisionPredictionItem1:
     "Traffic restriction warning: Identify content risks in advance and avoid platform rule violations",
@@ -449,24 +449,24 @@ export default {
   ourMission: "Our Mission",
   missionTitle: "Let creation return to creativity, make traffic traceable",
   missionContent:
-    "In the era of fierce short video competition, VeoGo AI is committed to using technology to break through the dilemma of 'artistic learning operations'. We believe that data and creativity are never opposites - through AI's rational insights, we amplify creators' emotional expressions, ensuring high-quality content doesn't need to be understood by algorithms.",
+    "In the era of fierce short video competition, yoozy.ai is committed to using technology to break through the dilemma of 'artistic learning operations'. We believe that data and creativity are never opposites - through AI's rational insights, we amplify creators' emotional expressions, ensuring high-quality content doesn't need to be understood by algorithms.",
 
   // Privacy Policy
-  privacyTitle: "veogo.ai Privacy Policy",
+  privacyTitle: "yoozy.ai Privacy Policy",
   privacyUpdateDate: "Updated: April 02, 2025",
   privacyEffectiveDate: "Effective: April 02, 2025",
 
   // Terms of Service
-  termsTitle: "yoozy Terms of Service",
+  termsTitle: "yoozy.ai Terms of Service",
   termsUpdateDate: "Updated: April 02, 2025",
   termsEffectiveDate: "Effective: April 02, 2025",
   termsIntro:
-    "Please read these Terms of Service carefully before using our service. Your continued use of veogo.ai constitutes your complete acceptance of all the following terms and conditions.",
+    "Please read these Terms of Service carefully before using our service. Your continued use of yoozy.ai constitutes your complete acceptance of all the following terms and conditions.",
 
   // Privacy Policy Content
   privacySection1Title: "1. Introduction",
   privacySection1Content:
-    "Thank you for using veogo.ai services. We are deeply committed to protecting your personal information and strictly comply with applicable privacy laws and regulations including the Personal Information Protection Law and Cybersecurity Law of the People's Republic of China.",
+    "Thank you for using yoozy.ai services. We are deeply committed to protecting your personal information and strictly comply with applicable privacy laws and regulations including the Personal Information Protection Law and Cybersecurity Law of the People's Republic of China.",
   privacySection2Title: "2. Information Collection and Use",
   privacySection2Content:
     "We collect information necessary to provide our AI analysis services, including account information, device data, and content you upload for analysis.",
@@ -490,12 +490,12 @@ export default {
     "We may update this policy from time to time and will notify you through site announcements, email, etc. Continued use of the service constitutes acceptance of the updated policy.",
   privacySection9Title: "9. Contact Us",
   privacySection9Content:
-    "If you have questions about this policy or need to exercise your rights, please contact us at: Email: support@veogo.ai",
+    "If you have questions about this policy or need to exercise your rights, please contact us at: Email: support@yoozy.ai",
 
   // Terms of Service Content
   termsSection1Title: "1. Service Scope",
   termsSection1Content:
-    "veogo.ai provides AI-powered video content analysis, generation, and feature optimization services for registered users through artificial intelligence technology.",
+    "yoozy.ai provides AI-powered video content analysis, generation, and feature optimization services for registered users through artificial intelligence technology.",
   termsSection2Title: "2. User Obligations",
   termsSection2Content:
     "Users must ensure account security, comply with content compliance requirements, and respect usage limitations.",

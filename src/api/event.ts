@@ -1,9 +1,9 @@
 import instance from "@/providers/api";
-import {Platform} from "react-native";
+import { Platform } from "react-native";
 
 import DeviceInfo from "react-native-device-info";
 import ReactNativeIdfaAaid from '@sparkfabrik/react-native-idfa-aaid';
-import {requestTrackingPermission} from "react-native-tracking-transparency";
+import { requestTrackingPermission } from "react-native-tracking-transparency";
 
 async function getIdfa() {
     if (Platform.OS !== 'ios') {
@@ -43,7 +43,6 @@ export const addEvent = async (params: {
     }
 
     console.log(data)
-
 
 
     return instance.request({

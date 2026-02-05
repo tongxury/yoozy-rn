@@ -520,9 +520,9 @@ export default {
 
   // FAQ Page
   faqTitle: "常见问题",
-  faqQuestion1: "VeoGo AI 是什么？",
+  faqQuestion1: "yoozy.ai 是什么？",
   faqAnswer1:
-    "VeoGo AI 是一款面向短视频创作者的智能预测工具，通过深度学习算法提前预测视频流量表现并提供秒级优化建议，帮助提升视频曝光率和点击率。",
+    "yoozy.ai 是一款面向短视频创作者的智能预测工具，通过深度学习算法提前预测视频流量表现并提供秒级优化建议，帮助提升视频曝光率和点击率。",
   faqQuestion2: "预测算法的技术原理是什么？",
   faqAnswer2:
     "基于深度神经网络和计算机视觉技术，结合平台流量规则建立多维度预测模型，并通过实时数据反馈持续优化置信度（当前预测准确率>92%）。",
@@ -542,14 +542,14 @@ export default {
 
   // Contact Page
   contactQRText: "扫描上方二维码添加客服微信",
-  contactEmail: "邮箱：support@veogo.ai",
+  contactEmail: "邮箱：support@yoozy.ai",
 
   // About Page
-  aboutAppTitle: "VeoGo AI",
+  aboutAppTitle: "yoozy.ai",
   aboutSubtitle: "赋能创作者，预见每一帧的爆款潜力",
   aboutUsSection: "关于我们",
   aboutUsContent:
-    "VeoGo AI 是专为短视频创作者打造的智能决策引擎，基于前沿的深度学习算法与多模态AI技术，助您在视频发布前精准预测流量表现，优化内容细节，让每一秒创作都指向「爆款」。",
+    "yoozy.ai 是专为短视频创作者打造的智能决策引擎，基于前沿的深度学习算法与多模态AI技术，助您在视频发布前精准预测流量表现，优化内容细节，让每一秒创作都指向「爆款」。",
   precisionPrediction: "精准预测",
   precisionPredictionItem1: "限流预警：提前识别内容风险，规避平台规则限制",
   precisionPredictionItem2:
@@ -567,24 +567,24 @@ export default {
   ourMission: "我们的使命",
   missionTitle: "让创作回归创意，让流量有迹可循",
   missionContent:
-    "在短视频竞争白热化的时代，VeoGo AI 致力于用技术打破「艺学运营」的困局。我们相信，数据与创意从来不是对立面——通过AI的理性洞察，放大创作者感性的表达，让优质内容无需被算法理解。",
+    "在短视频竞争白热化的时代，yoozy.ai 致力于用技术打破「艺学运营」的困局。我们相信，数据与创意从来不是对立面——通过AI的理性洞察，放大创作者感性的表达，让优质内容无需被算法理解。",
 
   // Privacy Policy
-  privacyTitle: "veogo.ai隐私政策",
+  privacyTitle: "yoozy.ai隐私政策",
   privacyUpdateDate: "更新日期：2025年04月02日",
   privacyEffectiveDate: "生效日期：2025年04月02日",
 
   // Terms of Service
-  termsTitle: "yoozy 服务条款",
+  termsTitle: "yoozy.ai 服务条款",
   termsUpdateDate: "更新日期：2025年04月02日",
   termsEffectiveDate: "生效日期：2025年04月02日",
   termsIntro:
-    "请您在使用服务前仔细阅读本服务条款，您继续使用 veogo.ai 即视为完全接受以下所有条款及条件内容。",
+    "请您在使用服务前仔细阅读本服务条款，您继续使用 yoozy.ai 即视为完全接受以下所有条款及条件内容。",
 
   // Privacy Policy Content
   privacySection1Title: "一、引言",
   privacySection1Content:
-    '感谢您使用veogo.ai（以下简称"我们"）提供的服务。我们深知个人信息的重要性，承诺严格遵守《中华人民共和国个人信息保护法》《网络安全法》等法律法规，并通过安全管理保证您的个人信息收集、使用、存储、共享及保护您的个人信息，以及您享有的权利。请在使用服务前仔细阅读本条款，如继续使用即视为同意本条款内容。',
+    '感谢您使用yoozy.ai（以下简称"我们"）提供的服务。我们深知个人信息的重要性，承诺严格遵守《中华人民共和国个人信息保护法》《网络安全法》等法律法规，并通过安全管理保证您的个人信息收集、使用、存储、共享及保护您的个人信息，以及您享有的权利。请在使用服务前仔细阅读本条款，如继续使用即视为同意本条款内容。',
   privacySection2Title: "二、信息收集与使用",
   privacySection2Content:
     "我们收集提供AI分析服务所需的信息，包括账号信息、设备数据以及您上传用于分析的内容。",
@@ -608,12 +608,12 @@ export default {
     "我们可能适时修订本条款，并通过站内公告、邮件等方式通知。若继续使用服务，视为接受更新后的政策。",
   privacySection9Title: "九、联系我们",
   privacySection9Content:
-    "如对政策有疑问或需行使权利，请通过以下方式联系：邮箱：support@veogo.ai",
+    "如对政策有疑问或需行使权利，请通过以下方式联系：邮箱：support@yoozy.ai",
 
   // Terms of Service Content
   termsSection1Title: "一、服务范围",
   termsSection1Content:
-    "veogo.ai 通过人工智能技术为注册用户提供视频内容分析、生成及特征优化服务。",
+    "yoozy.ai 通过人工智能技术为注册用户提供视频内容分析、生成及特征优化服务。",
   termsSection2Title: "二、用户义务",
   termsSection2Content:
     "用户需确保账号安全，遵守内容合规要求，并尊重使用限制。",

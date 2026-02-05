@@ -116,7 +116,7 @@ export default function RootLayout() {
         <SafeAreaProvider>
           <StripeProvider
             publishableKey="pk_live_KjsKZTP7GpgdW4PoYATjVfLK"
-            merchantIdentifier="com.veogo.app"
+            merchantIdentifier="com.yoozy.app"
           >
             <AppThemeProvider>
               <RootLayoutNav />
@@ -139,10 +139,10 @@ function RootLayoutNav() {
   usePermissionExecutor({
     onAllGranted: () => {
       console.log("--------------- 权限已获取");
-      void addEvent({ name: "visit" });
+      // void addEvent({ name: "visit" });
     },
     onElse: () => {
-      void addEvent({ name: "visit" });
+      // void addEvent({ name: "visit" });
     },
   });
   // const {fetchAsync: fetchAccounts} = useAccounts();
@@ -178,7 +178,7 @@ function RootLayoutNav() {
           }}
         >
           <View className="items-center justify-center">
-            <View 
+            <View
               style={{
                 shadowColor: colors.primary,
                 shadowOffset: { width: 0, height: 8 },
@@ -188,20 +188,20 @@ function RootLayoutNav() {
               }}
               className="bg-card p-6 rounded-[40px] mb-8"
             >
-              <Image 
+              <Image
                 source={require("../assets/images/app_icon.png")}
                 style={{ width: 100, height: 100, borderRadius: 24 }}
               />
             </View>
-            
+
             <View className="items-center">
-              <Text 
+              <Text
                 className="text-3xl font-black tracking-tighter mb-2"
                 style={{ color: colors.foreground }}
               >
                 YOOZY
               </Text>
-             
+
             </View>
           </View>
         </SafeAreaView>

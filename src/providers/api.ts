@@ -59,6 +59,12 @@ instance.interceptors.response.use(
     } else {
       switch (response.data?.code) {
         case "UNAUTHORIZED":
+          // // 对于后台请求或公共接口，不进行强制跳转
+          // const silentUrls = ['/api/bi/events', '/api/usr/users/me', '/api/v1/app-settings'];
+          // if (silentUrls.some(url => response.config.url?.includes(url))) {
+          //   return Promise.reject(response.data.message || response.data.code);
+          // }
+
           setTimeout(() => {
             router.navigate("/login");
           }, 0);
