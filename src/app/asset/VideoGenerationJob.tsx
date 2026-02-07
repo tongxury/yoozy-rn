@@ -1,6 +1,6 @@
 import useTailwindVars from "@/hooks/useTailwindVars";
 import { Feather } from "@expo/vector-icons";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useState } from "react";
 import {
     ActivityIndicator,
@@ -19,13 +19,14 @@ interface JobProps {
 }
 
 const VideoGenerationJob = ({ index: jobIndex, job, asset, refetch }: JobProps) => {
+    const router = useXRoute();
     const { colors } = useTailwindVars();
     const data = job?.dataBus?.videoGenerations || [];
-    const item = data?.[0]; 
-    
+    const item = data?.[0];
+
     const [isEditing, setIsEditing] = useState(false);
     const editable = job.status === 'confirming';
-    
+
     const status = item?.status?.toLowerCase() || job.status?.toLowerCase();
     const isFailed = status === 'failed';
     const isCompleted = !!item?.url;
@@ -46,7 +47,7 @@ const VideoGenerationJob = ({ index: jobIndex, job, asset, refetch }: JobProps) 
             <Text className="text-red-400 text-xs text-center leading-5 px-4 font-medium">
                 {item?.error || "发生了一些错误，请尝试重新生成"}
             </Text>
-            <TouchableOpacity 
+            <TouchableOpacity
                 onPress={refetch}
                 className="mt-8 px-6 py-3 bg-red-500 rounded-full"
             >
@@ -65,14 +66,14 @@ const VideoGenerationJob = ({ index: jobIndex, job, asset, refetch }: JobProps) 
                     blurRadius={10}
                 />
             )}
-            
+
             <View className="items-center">
                 <View className="w-20 h-20 bg-primary/20 rounded-full items-center justify-center mb-6">
                     <ActivityIndicator size="large" color={colors.primary} />
                 </View>
-                
+
                 <Text className="text-primary text-xl font-black mb-3 tracking-tight">{title}</Text>
-                
+
                 <View className="bg-white/10 px-4 py-2 rounded-2xl mb-6 border border-white/5">
                     <Text className="text-gray-400 text-sm font-bold">预计还需 5 分钟</Text>
                 </View>
@@ -97,7 +98,7 @@ const VideoGenerationJob = ({ index: jobIndex, job, asset, refetch }: JobProps) 
             <View className="flex-1">
                 {isRunning ? (
                     renderLoading(
-                         "视频生成中",
+                        "视频生成中",
                         "智能 AI 正在进行像素级渲染，请耐心等待"
                     )
                 ) : isFailed ? (
@@ -120,7 +121,7 @@ const VideoGenerationJob = ({ index: jobIndex, job, asset, refetch }: JobProps) 
                                     <Feather name="video" size={48} color={colors.primary} style={{ opacity: 0.2 }} />
                                 </View>
                             )}
-                            
+
                             <View className="absolute inset-0 items-center justify-center bg-black/10">
                                 <View className="w-16 h-16 rounded-full bg-white/20 items-center justify-center backdrop-blur-md border border-white/30">
                                     <Feather name="play" size={32} color="white" style={{ marginLeft: 4 }} />
@@ -128,7 +129,7 @@ const VideoGenerationJob = ({ index: jobIndex, job, asset, refetch }: JobProps) 
                             </View>
 
                             {editable && (
-                                <TouchableOpacity 
+                                <TouchableOpacity
                                     onPress={(e) => {
                                         e.stopPropagation();
                                         setIsEditing(true);

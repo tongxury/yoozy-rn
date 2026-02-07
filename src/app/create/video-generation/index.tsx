@@ -8,7 +8,7 @@ import { upload } from "@/utils/upload/tos";
 import { Ionicons } from "@expo/vector-icons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import * as ImagePicker from "expo-image-picker";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useState } from "react";
 import {
     ActivityIndicator,
@@ -23,6 +23,7 @@ import {
 import { Toast } from "react-native-toast-notifications";
 
 export default function VideoGenerationScreen() {
+    const router = useXRoute();
     const { colors } = useTailwindVars();
     const queryClient = useQueryClient();
 

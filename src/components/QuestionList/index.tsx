@@ -1,22 +1,23 @@
-import React, {useMemo, useRef, useState} from "react";
-import {FlatList, ScrollView, Text, TouchableOpacity, View} from "react-native";
+import React, { useMemo, useRef, useState } from "react";
+import { FlatList, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import QuestionView from "./V2/QuestionView";
 import GeneratingAnswerView from "./V2/GeneratingAnswerView";
 import ContinueQuestionModal from "./ContinueQuestionModal";
 import MarkdownView from "@/components/QuestionList/MarkdownView";
-import {Question} from "@/types";
+import { Question } from "@/types";
 import CreditView from "@/components/QuestionList/CreditView";
-import {router} from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 
 const QuestionList = ({
-                          data = [],
-                          refetch,
-                          onContinueQuestion,
-                      }: {
+    data = [],
+    refetch,
+    onContinueQuestion,
+}: {
     data: any[];
     refetch?: () => void;
     onContinueQuestion?: (question: string, onComplete: () => void) => void;
 }) => {
+    const router = useXRoute();
     const [showQuestionModal, setShowQuestionModal] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -53,15 +54,15 @@ const QuestionList = ({
         }
 
         if (x.status === "prepared" || x.status === "generating" || x.status === "toRetry") {
-            return <GeneratingAnswerView data={x} onComplete={refetch}/>;
+            return <GeneratingAnswerView data={x} onComplete={refetch} />;
         }
 
         if (x.status === "completed") {
-            return <MarkdownView text={x?.answer?.text}/>;
+            return <MarkdownView text={x?.answer?.text} />;
         }
 
         if (x.status === "created") {
-            return <CreditView data={x} onRecharge={() => router.navigate('/pricing')}/>;
+            return <CreditView data={x} onRecharge={() => router.navigate('/pricing')} />;
         }
 
         return <></>;
@@ -71,7 +72,7 @@ const QuestionList = ({
         <View className="flex-1">
             {/* 问题 */}
             <View className={'p-5'}>
-                <QuestionView data={data?.[currentIndex]}/>
+                <QuestionView data={data?.[currentIndex]} />
             </View>
             {/*<View className={'h-3 bg-muted'}></View>*/}
             {/* 答案 */}
@@ -89,11 +90,10 @@ const QuestionList = ({
                             <TouchableOpacity
                                 onPress={handlePrevious}
                                 disabled={currentIndex === 0}
-                                className={`w-8 h-8 rounded-full items-center justify-center ${
-                                    currentIndex === 0
+                                className={`w-8 h-8 rounded-full items-center justify-center ${currentIndex === 0
                                         ? 'bg-gray-700 opacity-30'
                                         : 'bg-gray-700'
-                                }`}
+                                    }`}
                                 activeOpacity={0.7}
                             >
                                 <Text className="text-white text-md ">‹</Text>
@@ -108,11 +108,10 @@ const QuestionList = ({
                             <TouchableOpacity
                                 onPress={handleNext}
                                 disabled={currentIndex === totalQuestions - 1}
-                                className={`w-8 h-8 rounded-full items-center justify-center ${
-                                    currentIndex === totalQuestions - 1
+                                className={`w-8 h-8 rounded-full items-center justify-center ${currentIndex === totalQuestions - 1
                                         ? 'bg-gray-700 opacity-30'
                                         : 'bg-gray-700'
-                                }`}
+                                    }`}
                                 activeOpacity={0.7}
                             >
                                 <Text className="text-gray-300 text-sm">›</Text>

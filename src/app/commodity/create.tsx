@@ -8,7 +8,7 @@ import { upload } from "@/utils/upload/tos";
 import { extractLinks, getImageName } from "@/utils/upload/utils";
 import { Feather } from "@expo/vector-icons";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useState } from "react";
 import {
     Keyboard,
@@ -23,6 +23,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Toast } from "react-native-toast-notifications";
 
 export default function CreateCommodityScreen() {
+    const router = useXRoute();
     const { colors } = useTailwindVars();
     const insets = useSafeAreaInsets();
     const queryClient = useQueryClient();

@@ -4,7 +4,7 @@ import { SkeletonLoader } from "@/components/ui/SkeletonLoader";
 import useTailwindVars from "@/hooks/useTailwindVars";
 import { Ionicons } from "@expo/vector-icons";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import { useMemo } from "react";
 import {
     ActivityIndicator,
@@ -31,6 +31,7 @@ interface TemplateListProps {
 }
 
 export default function TemplateList({ query = "" }: TemplateListProps) {
+    const router = useXRoute(); // Added useXRoute hook
 
     const { colors } = useTailwindVars();
     // Removed internal search state and handlers

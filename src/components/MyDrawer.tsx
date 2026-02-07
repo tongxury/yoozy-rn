@@ -1,10 +1,10 @@
 import React from 'react';
 import useTailwindVars from "@/hooks/useTailwindVars";
-import {View, Text, Image, TouchableOpacity, ScrollView, Modal, Animated, Dimensions, Platform} from 'react-native';
-import {AntDesign} from '@expo/vector-icons';
-import {router} from 'expo-router';
+import { View, Text, Image, TouchableOpacity, ScrollView, Modal, Animated, Dimensions, Platform } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import useXRoute from "@/hooks/useRoute";
 
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 interface MenuItem {
     title: string;
     route?: string;
@@ -83,7 +83,8 @@ interface Props {
     onClose: () => void;
 }
 
-export default function MyDrawer({visible, onClose}: Props) {
+export default function MyDrawer({ visible, onClose }: Props) {
+    const router = useXRoute();
     const { colors } = useTailwindVars();
     const [slideAnim] = React.useState(new Animated.Value(-300));
     const screenWidth = Dimensions.get('window').width;
@@ -136,7 +137,7 @@ export default function MyDrawer({visible, onClose}: Props) {
                         style={[
                             {
                                 width: drawerWidth,
-                                transform: [{translateX: slideAnim}],
+                                transform: [{ translateX: slideAnim }],
                                 backgroundColor: colors.background,
                                 height: '100%',
                                 paddingTop: insets.top,
@@ -169,9 +170,8 @@ export default function MyDrawer({visible, onClose}: Props) {
                                             <TouchableOpacity
                                                 key={itemIndex}
                                                 onPress={() => handleMenuPress(item)}
-                                                className={`px-4 py-3 flex-row items-center justify-between ${
-                                                    item.isHighlight ? 'bg-[#FFE4B5]/10' : ''
-                                                }`}
+                                                className={`px-4 py-3 flex-row items-center justify-between ${item.isHighlight ? 'bg-[#FFE4B5]/10' : ''
+                                                    }`}
                                             >
                                                 <View className="flex-row items-center">
                                                     {item.isHighlight && (
@@ -183,13 +183,12 @@ export default function MyDrawer({visible, onClose}: Props) {
                                                         />
                                                     )}
                                                     <Text
-                                                        className={`text-base ${
-                                                            item.isDanger
+                                                        className={`text-base ${item.isDanger
                                                                 ? 'text-red-500'
                                                                 : item.isHighlight
-                                                                ? 'text-[#FFD700]'
-                                                                : 'text-white'
-                                                        }`}
+                                                                    ? 'text-[#FFD700]'
+                                                                    : 'text-white'
+                                                            }`}
                                                     >
                                                         {item.title}
                                                     </Text>

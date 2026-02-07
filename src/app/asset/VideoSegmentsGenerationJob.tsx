@@ -1,6 +1,6 @@
 import useTailwindVars from "@/hooks/useTailwindVars";
 import { Feather } from "@expo/vector-icons";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useMemo, useState } from "react";
 import {
     ActivityIndicator,
@@ -81,7 +81,7 @@ const VideoCard = React.memo(({
 
                                 {/* Floating Edit Button */}
                                 {editable && (
-                                    <TouchableOpacity 
+                                    <TouchableOpacity
                                         onPress={(e) => {
                                             e.stopPropagation();
                                             onEdit(index);
@@ -113,9 +113,10 @@ const VideoCard = React.memo(({
 });
 
 const VideoSegmentsGenerationJob = ({ index: jobIndex, job, asset, refetch, selectedItem, onSelect }: JobProps) => {
+    const router = useXRoute();
     const data = job?.dataBus?.videoGenerations || [];
     const editable = job.status === 'confirming';
-    
+
     const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -158,7 +159,7 @@ const VideoSegmentsGenerationJob = ({ index: jobIndex, job, asset, refetch, sele
             {data.length > 1 && (
                 <View className="flex-row justify-center items-center mt-4 gap-1.5">
                     {data.map((_: any, idx: number) => (
-                        <View 
+                        <View
                             key={idx}
                             className={`h-1.5 rounded-full ${idx === activeIndex ? 'w-4 bg-primary' : 'w-1.5 bg-gray-200'}`}
                         />

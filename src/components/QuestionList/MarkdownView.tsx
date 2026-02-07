@@ -1,7 +1,7 @@
-import React, {ReactNode} from "react";
-import {ScrollView, Text, TextStyle, View, ViewStyle} from "react-native";
-import type {RendererInterface} from "react-native-marked";
-import Markdown, {Renderer} from "react-native-marked";
+import React, { ReactNode } from "react";
+import { ScrollView, Text, TextStyle, View, ViewStyle } from "react-native";
+import type { RendererInterface } from "react-native-marked";
+import Markdown, { Renderer } from "react-native-marked";
 import useTailwindVars from "@/hooks/useTailwindVars";
 
 interface MarkdownViewProps {
@@ -25,7 +25,7 @@ class CustomMarkdownRenderer extends Renderer implements RendererInterface {
                 return (
                     <View key={this.getKey()} className={'mt-8 mb-6'}>
                         <View className={'bg-primary/10 rounded-xl p-6 border-l-4'}
-                              style={{borderLeftColor: this.colors.primary}}>
+                            style={{ borderLeftColor: this.colors.primary }}>
                             <Text style={{
                                 fontSize: this.fontSizes.fontSizeXL || 24,
                                 fontWeight: '800',
@@ -43,11 +43,11 @@ class CustomMarkdownRenderer extends Renderer implements RendererInterface {
                 return (
                     <View key={this.getKey()} className={'mt-6 mb-4'}>
                         <View className={'bg-background rounded-lg p-4 border-l-4'}
-                              style={{borderLeftColor: this.colors.primary}}>
+                            style={{ borderLeftColor: this.colors.primary }}>
                             <Text style={{
                                 fontSize: this.fontSizes.fontSizeLG || 20,
                                 fontWeight: '700',
-                                color: this."#ffffff",
+                                color: "#ffffff",
                                 letterSpacing: 0.3,
                             }}>
                                 {text}
@@ -60,7 +60,7 @@ class CustomMarkdownRenderer extends Renderer implements RendererInterface {
                 return (
                     <View key={this.getKey()} className={'mt-5 mb-3'}>
                         <View className={'bg-background rounded-lg p-4 border-l-4'}
-                              style={{borderLeftColor: this.colors.primary + '80'}}>
+                            style={{ borderLeftColor: this.colors.primary + '80' }}>
                             <Text style={{
                                 fontSize: this.fontSizes.fontSizeMD + 2 || 18,
                                 fontWeight: '600',
@@ -78,7 +78,7 @@ class CustomMarkdownRenderer extends Renderer implements RendererInterface {
                     <Text key={this.getKey()} style={{
                         fontSize: this.fontSizes.fontSizeMD || 16,
                         fontWeight: '500',
-                        color: this."#ffffff",
+                        color: "#ffffff",
                         marginVertical: 8,
                     }}>
                         {text}
@@ -91,12 +91,12 @@ class CustomMarkdownRenderer extends Renderer implements RendererInterface {
     strong(children: string | React.ReactNode[], styles?: TextStyle): React.ReactNode {
         return (
             <Text key={this.getKey()}
-                  style={{
-                      fontWeight: '800',
-                      color: this.colors.primary,
-                      fontSize: this.fontSizes.fontSizeMD,
-                      lineHeight: this.fontSizes.fontSizeMD * 1.5,
-                  }}>
+                style={{
+                    fontWeight: '800',
+                    color: this.colors.primary,
+                    fontSize: this.fontSizes.fontSizeMD,
+                    lineHeight: this.fontSizes.fontSizeMD * 1.5,
+                }}>
                 {children}
             </Text>
         );
@@ -107,7 +107,7 @@ class CustomMarkdownRenderer extends Renderer implements RendererInterface {
         return (
             <View key={this.getKey()} className={'my-4'}>
                 <Text style={{
-                    color: this.colors['muted-foreground'] || this."#ffffff",
+                    color: this.colors['muted-foreground'] || "#ffffff",
                     fontSize: this.fontSizes.fontSizeMD,
                     lineHeight: this.fontSizes.fontSizeMD * 1.6, // 增加行高提升阅读性
                     textAlign: 'justify',
@@ -136,7 +136,7 @@ class CustomMarkdownRenderer extends Renderer implements RendererInterface {
                 >
                     <Text style={{
                         fontFamily: 'monospace',
-                        color: this.colors.foreground || this."#ffffff",
+                        color: this.colors.foreground || "#ffffff",
                         fontSize: this.fontSizes.fontSizeSM,
                         lineHeight: this.fontSizes.fontSizeSM * 1.4,
                         ...textStyle,
@@ -153,7 +153,7 @@ class CustomMarkdownRenderer extends Renderer implements RendererInterface {
         return (
             <Text key={this.getKey()} style={{
                 fontStyle: 'italic',
-                color: this.colors.foreground || this."#ffffff",
+                color: this.colors.foreground || "#ffffff",
                 ...styles,
             }}>
                 {children}
@@ -209,7 +209,7 @@ class CustomMarkdownRenderer extends Renderer implements RendererInterface {
     text(text: string | React.ReactNode[], styles?: TextStyle): React.ReactNode {
         return (
             <Text key={this.getKey()} style={{
-                color: this."#ffffff",
+                color: "#ffffff",
                 ...styles,
             }}>
                 {text}
@@ -245,11 +245,11 @@ class CustomMarkdownRenderer extends Renderer implements RendererInterface {
     }
 }
 
-const MarkdownView: React.FC<MarkdownViewProps> = ({text}) => {
-    const {colors, fontSizes} = useTailwindVars();
+const MarkdownView: React.FC<MarkdownViewProps> = ({ text }) => {
+    const { colors, fontSizes } = useTailwindVars();
 
     const customRenderer = React.useMemo(() =>
-            new CustomMarkdownRenderer(colors, fontSizes),
+        new CustomMarkdownRenderer(colors, fontSizes),
         [colors, fontSizes]
     );
 

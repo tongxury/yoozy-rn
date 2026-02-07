@@ -6,7 +6,8 @@ import useTailwindVars from "@/hooks/useTailwindVars";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { LinearGradient } from "expo-linear-gradient";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import { useRef, useState } from "react";
 import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -16,7 +17,7 @@ const { height } = Dimensions.get("window");
 
 const Template = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const router = useRouter();
+  const router = useXRoute();
   const insets = useSafeAreaInsets();
   const [paused, setPaused] = useState(false);
   const [detailsVisible, setDetailsVisible] = useState(false);

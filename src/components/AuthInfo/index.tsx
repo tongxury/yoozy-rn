@@ -1,17 +1,18 @@
-import {useAuthUser} from "@/hooks/useAuthUser";
+import { useAuthUser } from "@/hooks/useAuthUser";
 import LatterAvatar from "@/components/LatterAvatar";
-import {TouchableOpacity} from "react-native";
-import {router} from "expo-router";
+import { TouchableOpacity } from "react-native";
+import useXRoute from "@/hooks/useRoute";
 
 
 const AuthInfo = () => {
+    const router = useXRoute();
 
-    const {user} = useAuthUser({fetchImmediately: true})
+    const { user } = useAuthUser({ fetchImmediately: true })
 
     if (user) {
         return (
             <TouchableOpacity activeOpacity={0.9} onPress={() => router.push("/user/my")}>
-                <LatterAvatar  size={30} name={user._id!} />
+                <LatterAvatar size={30} name={user._id!} />
             </TouchableOpacity>
         )
     }

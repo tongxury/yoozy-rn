@@ -10,7 +10,8 @@ import { Feather } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
-import { router, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useState } from "react";
 import { ActionSheetIOS, ActivityIndicator, Animated, Image, Platform, Text, TouchableOpacity, View } from "react-native";
 import { Toast } from "react-native-toast-notifications";
@@ -154,6 +155,7 @@ const SelectorCard = ({
 };
 
 const SegmentReplication = () => {
+    const router = useXRoute();
     const { colors } = useTailwindVars();
     const { commodityId, inspirationId } = useLocalSearchParams<{ commodityId: string; inspirationId: string }>();
 
@@ -333,9 +335,9 @@ const SegmentReplication = () => {
                         )}
                     </TouchableOpacity>
 
-                        <View className="flex-row items-center gap-3 ">
-                            <Text className="text-base font-bold text-gray-900 leading-none">开始生成</Text>
-                            {/* <TouchableOpacity
+                    <View className="flex-row items-center gap-3 ">
+                        <Text className="text-base font-bold text-gray-900 leading-none">开始生成</Text>
+                        {/* <TouchableOpacity
                                 onPress={() => {
                                     if (Platform.OS === 'ios') {
                                         ActionSheetIOS.showActionSheetWithOptions(
@@ -361,7 +363,7 @@ const SegmentReplication = () => {
                                 </Text>
                                 <Feather name="chevron-down" size={10} color="#666" />
                             </TouchableOpacity> */}
-                        </View>
+                    </View>
                 </BlurView>
             </Animated.View>
 

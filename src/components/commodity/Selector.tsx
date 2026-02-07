@@ -4,7 +4,7 @@ import { SkeletonLoader } from "@/components/ui/SkeletonLoader";
 import useTailwindVars from "@/hooks/useTailwindVars";
 import { Feather } from "@expo/vector-icons";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useMemo, useRef, useState } from "react";
 import {
     ActivityIndicator,
@@ -25,6 +25,7 @@ const containerPadding = 16;
 const cardWidth = (screenWidth - (containerPadding * 2) - cardGap) / columnCount;
 
 const CommoditySelector = ({ value, onChange }: { value: any, onChange: (value: any) => void }) => {
+    const router = useXRoute();
     const { colors } = useTailwindVars();
     const [queryKeyword, setQueryKeyword] = useState("");
     const searchTimeout = useRef<any>(null);

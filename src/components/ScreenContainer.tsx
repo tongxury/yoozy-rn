@@ -2,7 +2,8 @@
 import useTailwindVars from "@/hooks/useTailwindVars";
 import { Feather } from "@expo/vector-icons";
 import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
-import { router, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
+import useXRoute from "@/hooks/useRoute";
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'nativewind';
 import React from 'react';
@@ -30,6 +31,7 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({
     translucent = true,
     stackScreenProps,
 }) => {
+    const router = useXRoute();
 
     const { colors } = useTailwindVars();
     const { colorScheme } = useColorScheme();

@@ -3,12 +3,13 @@ import CommoditySelector from "@/components/commodity/Selector";
 import CreditEntry from "@/components/CreditEntry";
 import useTailwindVars from "@/hooks/useTailwindVars";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useState } from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 import { Toast } from "react-native-toast-notifications";
 
 const Starter = () => {
+  const router = useXRoute();
   const { colors } = useTailwindVars();
   const [confirmItem, setConfirmItem] = useState<any>(null);
 

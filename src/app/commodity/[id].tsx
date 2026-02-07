@@ -4,7 +4,8 @@ import { SkeletonLoader } from "@/components/ui/SkeletonLoader";
 import useTailwindVars from "@/hooks/useTailwindVars";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import { useMemo, useState, } from "react";
 import {
     Dimensions,
@@ -21,7 +22,7 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 export default function CommodityDetailScreen() {
     const { id } = useLocalSearchParams<{ id: string }>();
     const { colors } = useTailwindVars();
-    const router = useRouter();
+    const router = useXRoute();
     const insets = useSafeAreaInsets();
     const [showAllImages, setShowAllImages] = useState(false);
     const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);

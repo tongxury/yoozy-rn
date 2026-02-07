@@ -4,7 +4,8 @@ import { useSettings } from "@/hooks/useSettings";
 import useTailwindVars from "@/hooks/useTailwindVars";
 import { useTranslation } from "@/i18n/translation";
 import { useQuery } from "@tanstack/react-query";
-import { router, useFocusEffect, usePathname } from "expo-router";
+import { useFocusEffect, usePathname } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useCallback } from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 
@@ -12,6 +13,7 @@ import MediaView from "@/components/Resource/MediaView";
 import { isMedia } from "@/utils/resource";
 
 function LatestQuestionList() {
+    const router = useXRoute();
     // const {theme} = useTheme();
 
     const { colors } = useTailwindVars();

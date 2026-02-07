@@ -3,7 +3,7 @@ import CreditEntry from "@/components/CreditEntry";
 import useTailwindVars from "@/hooks/useTailwindVars";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React from "react";
 import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import AuthInfo from "./AuthInfo";
@@ -16,9 +16,10 @@ interface ScreenHeaderProps {
 }
 
 export const ScreenHeader: React.FC<ScreenHeaderProps> = ({ title = "", closeable = true }) => {
+    const router = useXRoute();
     const { colors } = useTailwindVars();
 
-    const {user, isLoading} = useAuthUser({fetchImmediately: true})
+    const { user, isLoading } = useAuthUser({ fetchImmediately: true })
 
     return (
         <View className={"px-5 pb-4 flex-row justify-between items-center"}>

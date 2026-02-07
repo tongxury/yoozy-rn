@@ -1,6 +1,6 @@
 import useTailwindVars from "@/hooks/useTailwindVars";
 import { Feather } from "@expo/vector-icons";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import {
     ActivityIndicator,
@@ -26,17 +26,17 @@ interface VideoGenerationJobProps {
     refetch: () => void;
 }
 
-const SegmentCard = React.memo(({ 
-    item, 
-    index, 
-    editable, 
-    isRemixing, 
-    onOpenEditor 
-}: { 
-    item: any; 
-    index: number; 
-    editable?: boolean; 
-    isRemixing: boolean; 
+const SegmentCard = React.memo(({
+    item,
+    index,
+    editable,
+    isRemixing,
+    onOpenEditor
+}: {
+    item: any;
+    index: number;
+    editable?: boolean;
+    isRemixing: boolean;
     onOpenEditor: (index: number) => void;
 }) => {
     const crop = item.remixOptions?.crop || [0, item.videoGeneration?.duration || 0];
@@ -55,7 +55,7 @@ const SegmentCard = React.memo(({
             </View>
 
             {/* Video Card */}
-            <TouchableOpacity 
+            <TouchableOpacity
                 activeOpacity={0.9}
                 onPress={() => editable && !isRemixing && onOpenEditor(index)}
                 className="relative aspect-[9/16] bg-gray-100 rounded-2xl overflow-hidden border border-gray-100 shadow-sm"
@@ -71,7 +71,7 @@ const SegmentCard = React.memo(({
             </TouchableOpacity>
 
             {/* Config Preview */}
-            <TouchableOpacity 
+            <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={() => editable && !isRemixing && onOpenEditor(index)}
                 className={`flex flex-col gap-1.5 px-1 ${editable && !isRemixing ? 'bg-gray-50/50 rounded-lg p-2' : ''}`}
@@ -93,16 +93,16 @@ const SegmentCard = React.memo(({
     );
 });
 
-const SegmentEditor = ({ 
-    item, 
-    visible, 
-    onClose, 
-    onSave 
-}: { 
-    item: any; 
-    visible: boolean; 
-    onClose: () => void; 
-    onSave: (crop: [number, number], speed: number) => void 
+const SegmentEditor = ({
+    item,
+    visible,
+    onClose,
+    onSave
+}: {
+    item: any;
+    visible: boolean;
+    onClose: () => void;
+    onSave: (crop: [number, number], speed: number) => void
 }) => {
     const videoDuration = item.videoGeneration?.duration || 0;
     const initialCrop = item.remixOptions?.crop || [0, videoDuration];
@@ -134,7 +134,7 @@ const SegmentEditor = ({
         const num = parseFloat(val) || 0;
         const newCrop = [...crop] as [number, number];
         newCrop[index] = Math.max(0, Math.min(videoDuration, num));
-        
+
         // Ensure start < end
         if (index === 0 && newCrop[0] >= newCrop[1]) {
             newCrop[1] = Math.min(videoDuration, newCrop[0] + 0.1);
@@ -218,7 +218,7 @@ const SegmentEditor = ({
                     </View>
 
                     {/* Save Button */}
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         onPress={() => onSave(crop, speed)}
                         className="w-full bg-primary py-4 rounded-2xl items-center justify-center mb-10 shadow-lg shadow-primary/30"
                     >
@@ -231,6 +231,7 @@ const SegmentEditor = ({
 };
 
 const RemixJob = ({ job, asset, refetch }: VideoGenerationJobProps) => {
+    const router = useXRoute();
     const { colors } = useTailwindVars();
     const [editingIdx, setEditingIdx] = useState<number | null>(null);
     const [saving, setSaving] = useState(false);
@@ -247,11 +248,11 @@ const RemixJob = ({ job, asset, refetch }: VideoGenerationJobProps) => {
         try {
             const currentSegments = JSON.parse(JSON.stringify(data.segments));
             const segment = currentSegments[editingIdx];
-            
+
             if (!segment.remixOptions) segment.remixOptions = {};
             segment.remixOptions.crop = crop;
             segment.remixOptions.speed = speed;
-        
+
             await updateWorkflowJob({
                 id: asset.workflow?._id,
                 index: job.index,
@@ -260,7 +261,7 @@ const RemixJob = ({ job, asset, refetch }: VideoGenerationJobProps) => {
                     remix: {
                         ...data,
                         segments: currentSegments,
-                        status: 'waiting' 
+                        status: 'waiting'
                     },
                 }
             });
@@ -310,17 +311,17 @@ const RemixJob = ({ job, asset, refetch }: VideoGenerationJobProps) => {
 
     const renderResult = () => (
         <View className="flex-1 p-4">
-                        <TouchableOpacity
-                            activeOpacity={0.9}
-                            onPress={() => router.push(`/video?url=${data.url}`)}
+            <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={() => router.push(`/video?url=${data.url}`)}
                 className="w-full aspect-[9/16] bg-black rounded-3xl overflow-hidden shadow-xl border-[6px] border-white"
-                        >
-                <Image 
-                    source={{ uri: data.coverUrl || data.lastFrame }} 
-                    className="w-full h-full" 
-                    resizeMode="cover" 
+            >
+                <Image
+                    source={{ uri: data.coverUrl || data.lastFrame }}
+                    className="w-full h-full"
+                    resizeMode="cover"
                 />
-                            <View className="absolute inset-0 items-center justify-center bg-black/10">
+                <View className="absolute inset-0 items-center justify-center bg-black/10">
                     <Feather name="play-circle" size={64} color="white" />
                 </View>
             </TouchableOpacity>
@@ -333,10 +334,10 @@ const RemixJob = ({ job, asset, refetch }: VideoGenerationJobProps) => {
                     </View>
                 </View>
                 <Text className="text-2xl font-black text-gray-900 mb-2">混剪成片预览</Text>
-                
+
                 <View className="flex-row gap-3 mt-4">
                     {editable && (
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             onPress={() => setShowSegments(true)}
                             className="flex-1 h-14 bg-gray-50 rounded-2xl flex-row items-center justify-center border border-gray-100"
                         >
@@ -344,7 +345,7 @@ const RemixJob = ({ job, asset, refetch }: VideoGenerationJobProps) => {
                             <Text className="text-sm font-bold text-gray-700 ml-2">调整参数</Text>
                         </TouchableOpacity>
                     )}
-                    <TouchableOpacity 
+                    <TouchableOpacity
                         onPress={() => router.push(`/video?url=${data.url}`)}
                         className="flex-1 h-14 bg-primary rounded-2xl flex-row items-center justify-center shadow-lg shadow-primary/30"
                     >
@@ -363,14 +364,14 @@ const RemixJob = ({ job, asset, refetch }: VideoGenerationJobProps) => {
                     <View className={`px-3 py-1 rounded-full flex-row items-center ${isRemixing ? 'bg-blue-50' : 'bg-green-50'}`}>
                         {isRemixing ? <ActivityIndicator size="small" color="#3B82F6" /> : <Feather name="check-circle" size={12} color="#10B981" />}
                         <Text className={`text-[10px] font-bold ml-1 uppercase ${isRemixing ? 'text-blue-600' : 'text-green-600'}`}>
-                            {data.status === 'waiting' ? '等待队列' : 
-                             data.status === 'running' ? '正在合成' : 
-                             data.status === 'completed' ? '合成完成' : data.status}
+                            {data.status === 'waiting' ? '等待队列' :
+                                data.status === 'running' ? '正在合成' :
+                                    data.status === 'completed' ? '合成完成' : data.status}
                         </Text>
-                            </View>
-                    
+                    </View>
+
                     {editable && !isRemixing && (
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             onPress={handleStartGeneration}
                             className="flex-row items-center gap-1.5"
                         >
@@ -382,7 +383,7 @@ const RemixJob = ({ job, asset, refetch }: VideoGenerationJobProps) => {
                     )}
 
                     {hasResult && !isRemixing && (
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             onPress={() => setShowSegments(false)}
                             className="flex-row items-center gap-1.5 border-l border-gray-100 pl-3"
                         >

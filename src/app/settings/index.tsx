@@ -1,30 +1,32 @@
-import React, {useCallback} from "react";
+import React, { useCallback } from "react";
 import useTailwindVars from "@/hooks/useTailwindVars";
-import {ScrollView, Text, TouchableOpacity, View} from "react-native";
-import {AntDesign, Feather, Ionicons, MaterialCommunityIcons, MaterialIcons} from "@expo/vector-icons";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { AntDesign, Feather, Ionicons, MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
-import {router, useFocusEffect} from "expo-router";
-import {HStack, Stack} from "react-native-flex-layout";
+import { useFocusEffect } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
+import { HStack, Stack } from "react-native-flex-layout";
 import LetterAvatar from "@/components/LatterAvatar";
-import {useTranslation} from "@/i18n/translation";
-import {SkeletonLoader} from "@/components/ui/SkeletonLoader";
-import {useQuery} from "@tanstack/react-query";
-import {getUser} from "@/api/api";
-import {FlashIcon} from "@/constants/scene_icons";
+import { useTranslation } from "@/i18n/translation";
+import { SkeletonLoader } from "@/components/ui/SkeletonLoader";
+import { useQuery } from "@tanstack/react-query";
+import { getUser } from "@/api/api";
+import { FlashIcon } from "@/constants/scene_icons";
 import useAppUpdate from "@/hooks/useAppUpdate";
-import {fetchCreditState} from "@/api/payment";
-import {useAuthUser} from "@/hooks/useAuthUser";
+import { fetchCreditState } from "@/api/payment";
+import { useAuthUser } from "@/hooks/useAuthUser";
 
 
 export default function MyScreen() {
     const { colors } = useTailwindVars();
+    const router = useXRoute();
 
-    const {user, isLoading} = useAuthUser({fetchImmediately: true});
+    const { user, isLoading } = useAuthUser({ fetchImmediately: true });
 
 
-    const {currentVersion, checkAndUpdate} = useAppUpdate()
+    const { currentVersion, checkAndUpdate } = useAppUpdate()
 
-    const {t,} = useTranslation();
+    const { t, } = useTranslation();
 
 
     const menuItems: any[][] = [
@@ -35,7 +37,7 @@ export default function MyScreen() {
                     router.push("/contact");
                 },
                 icon: (size: number, color: string) =>
-                    <MaterialIcons name="headset-mic" size={size} color={color}/>,
+                    <MaterialIcons name="headset-mic" size={size} color={color} />,
             },
             {
                 title: "faq",
@@ -43,7 +45,7 @@ export default function MyScreen() {
                     router.push("/problem");
                 },
                 icon: (size: number, color: string) =>
-                    <MaterialIcons name="help-outline" size={size} color={color}/>,
+                    <MaterialIcons name="help-outline" size={size} color={color} />,
             },
         ],
         [
@@ -53,7 +55,7 @@ export default function MyScreen() {
                     router.push("/privacy");
                 },
                 icon: (size: number, color: string) =>
-                    <MaterialCommunityIcons name="shield-account-variant-outline" size={size} color={color}/>,
+                    <MaterialCommunityIcons name="shield-account-variant-outline" size={size} color={color} />,
             },
             // <MaterialCommunityIcons name="shield-account-variant-outline" size={24} color="black" />
             {
@@ -62,7 +64,7 @@ export default function MyScreen() {
                     router.push("/terms");
                 },
                 icon: (size: number, color: string) =>
-                    <AntDesign name="profile" size={size} color={color}/>,
+                    <AntDesign name="profile" size={size} color={color} />,
             },
             {
                 title: "aboutUs",
@@ -70,7 +72,7 @@ export default function MyScreen() {
                     router.push("/about");
                 },
                 icon: (size: number, color: string) =>
-                    <MaterialIcons name="info-outline" size={size} color={color}/>,
+                    <MaterialIcons name="info-outline" size={size} color={color} />,
             },
             {
                 title: "currentVersion",
@@ -78,7 +80,7 @@ export default function MyScreen() {
                     checkAndUpdate()
                 },
                 icon: (size: number, color: string) =>
-                    <MaterialCommunityIcons name="information-outline" size={size} color={color}/>,
+                    <MaterialCommunityIcons name="information-outline" size={size} color={color} />,
                 right: <Text className={'text-sm text-muted-foreground'}>{currentVersion}</Text>
             },
         ],
@@ -89,7 +91,7 @@ export default function MyScreen() {
                     router.push("/accountAndSecure");
                 },
                 icon: (size: number, color: string) =>
-                    <MaterialCommunityIcons name="account-circle-outline" size={size} color={color}/>,
+                    <MaterialCommunityIcons name="account-circle-outline" size={size} color={color} />,
             },
         ],
     ];
@@ -98,8 +100,8 @@ export default function MyScreen() {
         <ScrollView
             className="flex-1 bg-background"
             showsVerticalScrollIndicator={false}
-            // style={{overflow: "hidden"}}
-            // contentContainerStyle={{overflow: "visible"}}
+        // style={{overflow: "hidden"}}
+        // contentContainerStyle={{overflow: "visible"}}
         >
             {/* 用户信息区域 */}
             {user ? (
@@ -108,11 +110,11 @@ export default function MyScreen() {
                         <TouchableOpacity activeOpacity={0.9} onPress={() => {
                             // router.navigate("/user/me")
                         }}>
-                            <LetterAvatar name={user._id!} size={70}/>
+                            <LetterAvatar name={user._id!} size={70} />
                         </TouchableOpacity>
 
                         <Text className="text-sm text-muted-foreground leading-5 max-w-[120px]" numberOfLines={1}
-                              ellipsizeMode="tail">
+                            ellipsizeMode="tail">
                             Yoozy ID: {user?._id}
                         </Text>
                     </View>
@@ -120,11 +122,11 @@ export default function MyScreen() {
             ) : (
                 <View className="p-5 pt-10 h-[120px]">
                     <View className="flex-row items-center gap-[15px]">
-                        <SkeletonLoader circle width={55} height={55}/>
+                        <SkeletonLoader circle width={55} height={55} />
                         <View className="flex-1 gap-[5px]">
-                            <SkeletonLoader width={120} height={15}/>
-                            <SkeletonLoader width={60} height={15}/>
-                            <SkeletonLoader width={200} height={15}/>
+                            <SkeletonLoader width={120} height={15} />
+                            <SkeletonLoader width={60} height={15} />
+                            <SkeletonLoader width={200} height={15} />
                         </View>
                     </View>
                 </View>
@@ -135,7 +137,7 @@ export default function MyScreen() {
                 {/* 主题与语言设置 */}
                 <View
                     className="mb-6 bg-card/70 rounded-xl"
-                    style={{overflow: "visible"}}
+                    style={{ overflow: "visible" }}
                 >
                     {/*/!* 主题切换 *!/*/}
                     {/*<View className="px-4 py-4 flex-row items-center justify-between">*/}
@@ -190,7 +192,7 @@ export default function MyScreen() {
                     <View
                         key={index}
                         className="mt-3 bg-card/70 rounded-xl"
-                        // style={{overflow: "visible"}}
+                    // style={{overflow: "visible"}}
                     >
                         {section.map((item, itemIndex) => (
                             <TouchableOpacity
@@ -202,9 +204,8 @@ export default function MyScreen() {
                                 <View className="flex-row gap-[8px] items-center">
                                     {item.icon(20, colors.foreground)}
                                     <Text
-                                        className={`text-white  text-sm ${
-                                            item.isDanger ? "text-red-500" : "text-white"
-                                        }`}
+                                        className={`text-white  text-sm ${item.isDanger ? "text-red-500" : "text-white"
+                                            }`}
                                     >
                                         {t(item.title)}
                                     </Text>
@@ -213,7 +214,7 @@ export default function MyScreen() {
                                 <View className={'flex-row gap-0.5'}>
                                     {item.right}
                                     {item.onPress && (
-                                        <AntDesign name="right" size={14} color={colors['muted-foreground']}/>
+                                        <AntDesign name="right" size={14} color={colors['muted-foreground']} />
                                     )}
                                 </View>
 

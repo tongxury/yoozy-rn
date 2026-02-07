@@ -1,10 +1,10 @@
-import React, {useEffect, useState, useCallback} from "react";
-import {Alert, InteractionManager, View, Text} from "react-native";
+import React, { useEffect, useState, useCallback } from "react";
+import { Alert, InteractionManager, View, Text } from "react-native";
 import Meta from "@/app/pricing/MetaSub";
-import {callbackApple} from "@/api/payment";
-import {useTranslation} from "@/i18n/translation";
-import {useRouter} from "expo-router";
-import {useIAP} from 'expo-iap';
+import { callbackApple } from "@/api/payment";
+import { useTranslation } from "@/i18n/translation";
+import useXRoute from "@/hooks/useRoute";
+import { useIAP } from 'expo-iap';
 import ProcessingModal from "@/app/pricing/ProcessingModal";
 import usePricing from "@/hooks/usePricing";
 
@@ -22,11 +22,11 @@ const IOS = () => {
         validateReceipt,
     } = useIAP();
 
-    const {t} = useTranslation();
-    const router = useRouter();
+    const { t } = useTranslation();
+    const router = useXRoute();
     const [isReady, setIsReady] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const {plans, packages} = usePricing()
+    const { plans, packages } = usePricing()
 
     // 初始化商品和订阅
     useEffect(() => {
@@ -113,7 +113,7 @@ const IOS = () => {
 
             const currentPurchase = await requestPurchase({
                 // request: {ios: {sku}},
-                request: {sku: selectedPackage.iosAlias},
+                request: { sku: selectedPackage.iosAlias },
                 type: selectedPackage?.recurring ? 'subs' : 'inapp'
             });
 
@@ -129,8 +129,8 @@ const IOS = () => {
     return (
         <>
             <Meta onSubmit={onPay}
-                  disabled={!connected || !isReady || !products || products.length === 0}/>
-            <ProcessingModal loading={isLoading}/>
+                disabled={!connected || !isReady || !products || products.length === 0} />
+            <ProcessingModal loading={isLoading} />
         </>
     );
 };

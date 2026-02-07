@@ -6,7 +6,8 @@ import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useQuery } from "@tanstack/react-query";
 import { LinearGradient } from "expo-linear-gradient";
-import { router, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useEffect, useMemo, useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import CommoditySelect from "./CommoditySelect";
@@ -15,6 +16,7 @@ import TemplateSelect from "./TemplateSelect";
 
 const Session = () => {
     const { id } = useLocalSearchParams();
+    const router = useXRoute();
     const { colors } = useTailwindVars();
 
     // Step definitions

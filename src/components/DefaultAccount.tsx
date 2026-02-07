@@ -1,17 +1,18 @@
 import React from 'react';
-import {StyleProp, Text, TouchableOpacity, View, ViewStyle} from 'react-native';
-import {router} from 'expo-router';
+import { StyleProp, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
+import useXRoute from "@/hooks/useRoute";
 import SocialIcon from '@/assets/svgs';
-import {HStack} from 'react-native-flex-layout';
-import {useAccounts} from '@/hooks/useAccounts';
-import {Feather} from "@expo/vector-icons";
+import { HStack } from 'react-native-flex-layout';
+import { useAccounts } from '@/hooks/useAccounts';
+import { Feather } from "@expo/vector-icons";
 
-const DefaultAccount = ({refresh, style}: {
+const DefaultAccount = ({ refresh, style }: {
     refresh?: boolean,
     style?: StyleProp<ViewStyle>;
 }) => {
+    const router = useXRoute();
 
-    const {defaultAccount} = useAccounts();
+    const { defaultAccount } = useAccounts();
 
     if (!defaultAccount) return null;
 
@@ -24,7 +25,7 @@ const DefaultAccount = ({refresh, style}: {
         >
             <HStack items={'center'} spacing={8}>
                 {/* @ts-ignore 图标容器 */}
-                <SocialIcon name={defaultAccount?.platform} size={28}/>
+                <SocialIcon name={defaultAccount?.platform} size={28} />
 
                 {/* 昵称 */}
                 <Text className="text-[15px] font-semibold text-white ml-2">

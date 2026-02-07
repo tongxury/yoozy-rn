@@ -8,7 +8,8 @@ import { getCachedVideoUri } from "@/utils/videoCache";
 import { Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { LinearGradient } from "expo-linear-gradient";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import { useEffect, useRef, useState, useMemo } from "react";
 import { ActivityIndicator, Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -18,12 +19,12 @@ import { ResizeMode } from "react-native-video";
 const { width, height } = Dimensions.get("window");
 
 const Inspiration = () => {
-  const { id, videoUrl: initialVideoUrl, coverUrl: initialCoverUrl } = useLocalSearchParams<{ 
-    id: string; 
-    videoUrl?: string; 
-    coverUrl?: string; 
+  const { id, videoUrl: initialVideoUrl, coverUrl: initialCoverUrl } = useLocalSearchParams<{
+    id: string;
+    videoUrl?: string;
+    coverUrl?: string;
   }>();
-  const router = useRouter();
+  const router = useXRoute();
   const insets = useSafeAreaInsets();
   const [detailsVisible, setDetailsVisible] = useState(false);
   const [previewImages, setPreviewImages] = useState<Array<{ url: string; desc?: string }>>([]);
@@ -47,9 +48,9 @@ const Inspiration = () => {
   }, [current, initialVideoUrl]);
 
   const coverUrl = useMemo(() => {
-    return (initialCoverUrl ? decodeURIComponent(initialCoverUrl) : null) || 
-    current?.highlightFrames?.[0]?.url ||
-    current?.root?.coverUrl;
+    return (initialCoverUrl ? decodeURIComponent(initialCoverUrl) : null) ||
+      current?.highlightFrames?.[0]?.url ||
+      current?.root?.coverUrl;
   }, [current, initialCoverUrl]);
 
   const startTime = useMemo(() => current?.timeStart || 0, [current]);
@@ -87,7 +88,7 @@ const Inspiration = () => {
             onReadyForDisplay={onReadyForDisplay}
             style={StyleSheet.absoluteFill}
           />
-          
+
           {/* Custom Cover Overlay - Prevents the "Flash" */}
           {!videoReady && coverUrl && (
             <Image
@@ -100,11 +101,11 @@ const Inspiration = () => {
       ) : (
         <View style={StyleSheet.absoluteFill} className="justify-center items-center bg-black">
           {coverUrl ? (
-        <Image
-          source={{ uri: coverUrl }}
-          style={StyleSheet.absoluteFill}
-          resizeMode="cover"
-        />
+            <Image
+              source={{ uri: coverUrl }}
+              style={StyleSheet.absoluteFill}
+              resizeMode="cover"
+            />
           ) : (
             <ActivityIndicator size="large" color={colors.primary} />
           )}

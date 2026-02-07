@@ -1,41 +1,44 @@
-import React, {useCallback, useMemo, useState} from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import useTailwindVars from "@/hooks/useTailwindVars";
-import {Text, TouchableOpacity, View} from "react-native";
-import {useTranslation} from "@/i18n/translation";
+import { Text, TouchableOpacity, View } from "react-native";
+import { useTranslation } from "@/i18n/translation";
 import Button from "@/components/ui/Button";
-import {FlashIcon} from "@/constants/scene_icons";
+import { FlashIcon } from "@/constants/scene_icons";
 
-import {useQuery} from "@tanstack/react-query";
-import {fetchCreditState, fetchPaymentState} from "@/api/payment";
-import {router, useFocusEffect} from "expo-router";
-import {Grid} from "@/components/ui/Grid";
+import { useQuery } from "@tanstack/react-query";
+import { fetchCreditState, fetchPaymentState } from "@/api/payment";
+import { useFocusEffect } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
+import { Grid } from "@/components/ui/Grid";
 import useDateFormatter from "@/hooks/useDateFormatter";
-import {LinearGradient} from 'expo-linear-gradient';
-import {SkeletonLoader} from "@/components/ui/SkeletonLoader";
+import { LinearGradient } from 'expo-linear-gradient';
+import { SkeletonLoader } from "@/components/ui/SkeletonLoader";
 import usePricing from "@/hooks/usePricing";
 import Extra from "@/app/pricing/Extra";
 
-const MetaSub = ({onSubmit, disabled}: {
+const MetaSub = ({ onSubmit, disabled, payStart }: {
     onSubmit: (plan: any) => void,
-    disabled?: boolean
+    disabled?: boolean,
+    payStart?: number
 }) => {
+    const router = useXRoute();
 
-    const {plans, packages} = usePricing()
+    const { plans, packages } = usePricing()
 
     const [current, setCurrent] = useState<any>(plans[1]);
-    const {t} = useTranslation();
-    const {formatFromNow} = useDateFormatter()
+    const { t } = useTranslation();
+    const { formatFromNow } = useDateFormatter()
     const [isAgreed, setIsAgreed] = useState(false);
 
     const { colors } = useTailwindVars();
 
-    const {data: pr, isLoading: creditStateLoading, refetch: refetchCreditState} = useQuery({
+    const { data: pr, isLoading: creditStateLoading, refetch: refetchCreditState } = useQuery({
         queryKey: ["creditState"],
         queryFn: fetchCreditState,
         // staleTime: 60 * 60 * 1000,
     });
 
-    const {data: ps, isLoading: paymentStateLoading, refetch: refetchPaymentState} = useQuery({
+    const { data: ps, isLoading: paymentStateLoading, refetch: refetchPaymentState } = useQuery({
         queryKey: ["paymentState"],
         queryFn: fetchPaymentState,
         // staleTime: 60 * 60 * 1000,
@@ -56,21 +59,21 @@ const MetaSub = ({onSubmit, disabled}: {
     if (creditStateLoading || paymentStateLoading) {
 
         return (
-            <View style={{flex: 1, paddingHorizontal: 16, paddingVertical: 24, backgroundColor: '#000'}}>
+            <View style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 24, backgroundColor: '#000' }}>
                 {/* 顶部余额信息区域 */}
-                <View style={{alignItems: 'center', marginBottom: 32}}>
+                <View style={{ alignItems: 'center', marginBottom: 32 }}>
                     {/* 闪电图标 */}
-                    <SkeletonLoader circle width={60} height={60} style={{marginBottom: 16}}/>
+                    <SkeletonLoader circle width={60} height={60} style={{ marginBottom: 16 }} />
                     {/* 余额标签 */}
-                    <SkeletonLoader width={80} height={20} style={{marginBottom: 8}}/>
+                    <SkeletonLoader width={80} height={20} style={{ marginBottom: 8 }} />
                     {/* 余额数字 */}
-                    <SkeletonLoader width={120} height={40} style={{marginBottom: 8}}/>
+                    <SkeletonLoader width={120} height={40} style={{ marginBottom: 8 }} />
 
                 </View>
                 {/* 充值选项网格 */}
                 <Grid data={[1, 1, 1, 1]} spacing={15} renderItem={item => (
-                    <SkeletonLoader width={'100%'} height={100} style={{marginRight: 8}}/>
-                )}/>
+                    <SkeletonLoader width={'100%'} height={100} style={{ marginRight: 8 }} />
+                )} />
             </View>
         );
     }
@@ -82,8 +85,8 @@ const MetaSub = ({onSubmit, disabled}: {
                 style={{
                     flex: 1,
                 }}
-                start={{x: 0, y: 0}}
-                end={{x: 0, y: 0.5}}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 0.5 }}
             >
                 <View className="flex-1 px-4 py-6">
                     <View className={'flex-1'}>
@@ -91,7 +94,7 @@ const MetaSub = ({onSubmit, disabled}: {
                         <View className="items-center mb-8">
                             <View
                                 className="w-20 h-20 mb-4 rounded-full bg-muted shadow-lg justify-center items-center">
-                                <FlashIcon size={35} color={colors.primary}/>
+                                <FlashIcon size={35} color={colors.primary} />
                             </View>
 
                             <Text className="text-muted-foreground text-base mb-2">
@@ -139,7 +142,7 @@ const MetaSub = ({onSubmit, disabled}: {
                                             return <View className="flex-row items-center">
                                                 <View
                                                     className="w-12 h-12 bg-primary/20 rounded-xl items-center justify-center mr-4">
-                                                    <FlashIcon size={24} color={colors.primary}/>
+                                                    <FlashIcon size={24} color={colors.primary} />
                                                 </View>
                                                 <View className="flex-1">
                                                     <Text className="text-white text-xl font-bold mb-1">
@@ -163,7 +166,7 @@ const MetaSub = ({onSubmit, disabled}: {
                                     <Text className="text-white text-md font-bold mt-6">
                                         {t('payment.selectQuota')}
                                     </Text>
-                                    <Extra onSubmit={onSubmit} disabled={disabled} style={{flex: 1}}/>
+                                    <Extra onSubmit={onSubmit} disabled={disabled} style={{ flex: 1 }} />
                                 </View>
                                 :
                                 <View className={'flex-1'}>
@@ -173,39 +176,38 @@ const MetaSub = ({onSubmit, disabled}: {
                                         </Text>
 
                                         <Grid data={plans} spacing={15}
-                                              renderItem={(option: any, index) => {
-                                                  return (
-                                                      <TouchableOpacity
-                                                          key={option.id}
-                                                          activeOpacity={0.8}
-                                                          onPress={() => setCurrent(option)}
-                                                          className={`p-2 pt-9 rounded-xl border-2 items-center relative ${
-                                                              option.id === current?.id
-                                                                  ? "border-primary bg-muted"
-                                                                  : "border-border bg-muted"
-                                                          }`}
-                                                      >
-                                                          {option.tag && (
-                                                              <View
-                                                                  className="absolute top-1 right-1 bg-red-500 px-3 py-1 rounded-full">
-                                                                  <Text className="text-white text-xs font-bold">
-                                                                      {t(`payment.${option.tag}`)}
-                                                                  </Text>
-                                                              </View>
-                                                          )}
+                                            renderItem={(option: any, index) => {
+                                                return (
+                                                    <TouchableOpacity
+                                                        key={option.id}
+                                                        activeOpacity={0.8}
+                                                        onPress={() => setCurrent(option)}
+                                                        className={`p-2 pt-9 rounded-xl border-2 items-center relative ${option.id === current?.id
+                                                            ? "border-primary bg-muted"
+                                                            : "border-border bg-muted"
+                                                            }`}
+                                                    >
+                                                        {option.tag && (
+                                                            <View
+                                                                className="absolute top-1 right-1 bg-red-500 px-3 py-1 rounded-full">
+                                                                <Text className="text-white text-xs font-bold">
+                                                                    {t(`payment.${option.tag}`)}
+                                                                </Text>
+                                                            </View>
+                                                        )}
 
-                                                          <View className="flex-row items-center mb-3 gap-0.5">
-                                                              {/*<FlashIcon size={20} color={colors.primary}/>*/}
-                                                              <Text
-                                                                  className="text-muted-foreground text-md">{option.title}</Text>
-                                                          </View>
+                                                        <View className="flex-row items-center mb-3 gap-0.5">
+                                                            {/*<FlashIcon size={20} color={colors.primary}/>*/}
+                                                            <Text
+                                                                className="text-muted-foreground text-md">{option.title}</Text>
+                                                        </View>
 
-                                                          <Text
-                                                              className="text-white text-3xl mb-2  font-bold">¥ {option.amount}</Text>
+                                                        <Text
+                                                            className="text-white text-3xl mb-2  font-bold">¥ {option.amount}</Text>
 
-                                                      </TouchableOpacity>
-                                                  )
-                                              }}/>
+                                                    </TouchableOpacity>
+                                                )
+                                            }} />
 
                                     </View>
                                     <Button
@@ -221,22 +223,21 @@ const MetaSub = ({onSubmit, disabled}: {
                                         >
                                             {isAgreed && (
                                                 <View
-                                                    className={`w-2.5 h-2.5 rounded-full ${
-                                                        isAgreed ? "bg-primary" : "bg-transparent"
-                                                    }`}
+                                                    className={`w-2.5 h-2.5 rounded-full ${isAgreed ? "bg-primary" : "bg-transparent"
+                                                        }`}
                                                 />
                                             )}
                                         </TouchableOpacity>
                                         <Text className="text-muted-foreground text-xs">
                                             {t("agreeTerms")}
                                             <Text className="text-primary"
-                                                  onPress={() => router.push('/sub_terms')}>《Veogo付费协议》(含自动付费条款)，</Text>
+                                                onPress={() => router.push('/sub_terms')}>《Veogo付费协议》(含自动付费条款)，</Text>
                                             您可在购买后在 App Store中的“账户设置”功能来关闭自动续费。
                                             <Text className="text-primary"
-                                                  onPress={() => router.push('/terms')}>{t("terms")}</Text>
+                                                onPress={() => router.push('/terms')}>{t("terms")}</Text>
                                             {t("and")}
                                             <Text className="text-primary"
-                                                  onPress={() => router.push('/privacy')}>{t("privacy")}</Text>
+                                                onPress={() => router.push('/privacy')}>{t("privacy")}</Text>
                                         </Text>
                                     </View>
                                 </View>

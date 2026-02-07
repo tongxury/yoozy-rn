@@ -1,16 +1,16 @@
-import {View, Text, TouchableOpacity, Animated, Platform} from "react-native";
+import { View, Text, TouchableOpacity, Animated, Platform } from "react-native";
 import useTailwindVars from "@/hooks/useTailwindVars";
-import {AntDesign, Ionicons} from "@expo/vector-icons";
-import {router} from "expo-router";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
+import useXRoute from "@/hooks/useRoute";
 import Modal from "@/components/ui/Modal";
-import {useEffect, useRef} from "react";
-import {LinearGradient} from "expo-linear-gradient";
+import { useEffect, useRef } from "react";
+import { LinearGradient } from "expo-linear-gradient";
 import useGlobal from "@/hooks/useGlobal";
-import {useTranslation} from "@/i18n/translation";
+import { useTranslation } from "@/i18n/translation";
 
-import {Grid} from "@/components/ui/Grid";
-import {Scene} from "@/types";
-import {Toast} from "react-native-toast-notifications";
+import { Grid } from "@/components/ui/Grid";
+import { Scene } from "@/types";
+import { Toast } from "react-native-toast-notifications";
 
 export default function SceneSelector(
     {
@@ -20,13 +20,14 @@ export default function SceneSelector(
         visible?: boolean;
         onClose?: () => void;
     }) {
+    const router = useXRoute();
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
     const { colors } = useTailwindVars();
     const {
-        settings: {scenes},
+        settings: { scenes },
     } = useGlobal();
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     // 添加淡入动画
     useEffect(() => {
@@ -40,11 +41,11 @@ export default function SceneSelector(
     }, [visible]);
 
     const handleScenePress = (scene: Scene) => {
-            router.navigate({
-                pathname: "/starter",
-                params: {scene: scene.value},
-            });
-            onClose?.();
+        router.navigate({
+            pathname: "/starter",
+            params: { scene: scene.value },
+        });
+        onClose?.();
     };
 
 
@@ -78,7 +79,7 @@ export default function SceneSelector(
                 <Text className="text-sm text-white/60">{t("selectSceneSubtitle")}</Text>
             </View>
 
-            <Grid columns={3} containerStyle={{padding: 15}} spacing={10} data={scenes!} renderItem={(scene, index) => {
+            <Grid columns={3} containerStyle={{ padding: 15 }} spacing={10} data={scenes!} renderItem={(scene, index) => {
                 const isNew = scene.isNew;
                 const isPopular = scene.isPopular;
 
@@ -115,8 +116,8 @@ export default function SceneSelector(
                                     marginBottom: 12,
                                     position: 'relative' as const,
                                 }}
-                                start={{x: 0, y: 0}}
-                                end={{x: 1, y: 1}}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 1 }}
                             >
                                 {scene.getSceneIcon?.({
                                     size: 30,
@@ -125,7 +126,7 @@ export default function SceneSelector(
                             </LinearGradient>
 
                             <Text numberOfLines={2}
-                                  className="max-w-[80px] text-sm font-semibold text-white text-center mb-1">
+                                className="max-w-[80px] text-sm font-semibold text-white text-center mb-1">
                                 {t(`scene.${scene.value}`)}
                             </Text>
 
@@ -174,7 +175,7 @@ export default function SceneSelector(
                         </TouchableOpacity>
                     </Animated.View>
                 );
-            }}/>
+            }} />
 
 
             <TouchableOpacity
@@ -185,10 +186,10 @@ export default function SceneSelector(
                 <LinearGradient
                     colors={["rgba(100, 100, 100, 0.9)", "rgba(60, 60, 60, 0.9)"]}
                     style={closeButtonStyle}
-                    start={{x: 0, y: 0}}
-                    end={{x: 1, y: 1}}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
                 >
-                    <Ionicons name="close" size={24} color="white"/>
+                    <Ionicons name="close" size={24} color="white" />
                 </LinearGradient>
             </TouchableOpacity>
         </Modal>

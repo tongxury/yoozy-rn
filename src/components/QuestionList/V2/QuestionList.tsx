@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import {
     ActivityIndicator,
     KeyboardAvoidingView,
@@ -12,15 +12,17 @@ import {
 import QuestionView from "./QuestionView";
 import GeneratingAnswerView from "./GeneratingAnswerView";
 import MarkdownView from "@/components/QuestionList/MarkdownView";
-import {Question} from "@/types";
+import { Question } from "@/types";
 import CreditView from "@/components/QuestionList/CreditView";
-import {router, useFocusEffect} from "expo-router";
-import {useQuery} from "@tanstack/react-query";
-import {appendQuestion, listQuestions} from "@/api/api";
-import {SkeletonLoader} from "@/components/ui/SkeletonLoader";
+import { useFocusEffect } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
+import { useQuery } from "@tanstack/react-query";
+import { appendQuestion, listQuestions } from "@/api/api";
+import { SkeletonLoader } from "@/components/ui/SkeletonLoader";
 import Button from "@/components/ui/Button";
 
-const QuestionList = ({sessionId,}: { sessionId: string; }) => {
+const QuestionList = ({ sessionId, }: { sessionId: string; }) => {
+    const router = useXRoute();
 
     const [showQuestionModal, setShowQuestionModal] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,7 +35,7 @@ const QuestionList = ({sessionId,}: { sessionId: string; }) => {
         refetch: refetchQuestions,
     } = useQuery({
         queryKey: ["questions", sessionId],
-        queryFn: () => listQuestions({sessionId}),
+        queryFn: () => listQuestions({ sessionId }),
         staleTime: 7 * 24 * 60 * 60 * 1000,
         enabled: false,
         refetchOnWindowFocus: false,
@@ -55,7 +57,7 @@ const QuestionList = ({sessionId,}: { sessionId: string; }) => {
 
         appendQuestion({
             sessionId: sessionId,
-            prompt: {id: 'custom', content: question},
+            prompt: { id: 'custom', content: question },
         }).then(rsp => {
             refetchQuestions().then((result) => {
                 setCurrentIndex(result?.data?.data?.data?.list?.length - 1);
@@ -92,15 +94,15 @@ const QuestionList = ({sessionId,}: { sessionId: string; }) => {
         }
 
         if (x.status === "prepared" || x.status === "generating" || x.status === "toRetry") {
-            return <GeneratingAnswerView data={x} onComplete={refetchQuestions}/>;
+            return <GeneratingAnswerView data={x} onComplete={refetchQuestions} />;
         }
 
         if (x.status === "completed") {
-            return <MarkdownView text={x?.answer?.text}/>;
+            return <MarkdownView text={x?.answer?.text} />;
         }
 
         if (x.status === "created") {
-            return <CreditView data={x} onRecharge={() => router.navigate('/pricing')}/>;
+            return <CreditView data={x} onRecharge={() => router.navigate('/pricing')} />;
         }
 
         return <></>;
@@ -110,12 +112,12 @@ const QuestionList = ({sessionId,}: { sessionId: string; }) => {
     if (isQuestionsLoading && !questions) {
         return <View className="flex-1 gap-3 p-[20px]">
             <View className="gap-3 flex-row items-center">
-                <SkeletonLoader width={90} height={30}/>
-                <SkeletonLoader width={50} height={30}/>
+                <SkeletonLoader width={90} height={30} />
+                <SkeletonLoader width={50} height={30} />
             </View>
-            <SkeletonLoader width="100%" height={300}/>
-            <SkeletonLoader width="100%" height={300}/>
-            <SkeletonLoader width="100%" height={300}/>
+            <SkeletonLoader width="100%" height={300} />
+            <SkeletonLoader width="100%" height={300} />
+            <SkeletonLoader width="100%" height={300} />
         </View>
     }
 
@@ -123,13 +125,13 @@ const QuestionList = ({sessionId,}: { sessionId: string; }) => {
 
     return (
         <KeyboardAvoidingView
-            style={{flex: 1}}
+            style={{ flex: 1 }}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             keyboardVerticalOffset={Platform.OS === 'ios' ? 60 : 20}
         >
             {/* 问题 */}
             <View className={'p-5'}>
-                <QuestionView data={questions?.[currentIndex]}/>
+                <QuestionView data={questions?.[currentIndex]} />
             </View>
             {/*<View className={'h-3 bg-muted'}></View>*/}
             {/* 答案 */}
@@ -151,9 +153,9 @@ const QuestionList = ({sessionId,}: { sessionId: string; }) => {
                         // style={{maxHeight: 200, minHeight: 100}}
                         numberOfLines={2}
                         maxLength={maxLength}
-                        // returnKeyType="send"           // 将换行键改为"输入"
-                        // onSubmitEditing={() => setShowQuestionModal(false)}
-                        // blurOnSubmit={false}          // 防止提交时失去焦点
+                    // returnKeyType="send"           // 将换行键改为"输入"
+                    // onSubmitEditing={() => setShowQuestionModal(false)}
+                    // blurOnSubmit={false}          // 防止提交时失去焦点
                     />
                 }
 
@@ -167,11 +169,10 @@ const QuestionList = ({sessionId,}: { sessionId: string; }) => {
                                 <TouchableOpacity
                                     onPress={handlePrevious}
                                     disabled={currentIndex === 0}
-                                    className={`w-8 h-8 rounded-full items-center justify-center ${
-                                        currentIndex === 0
+                                    className={`w-8 h-8 rounded-full items-center justify-center ${currentIndex === 0
                                             ? 'bg-gray-700 opacity-30'
                                             : 'bg-gray-700'
-                                    }`}
+                                        }`}
                                     activeOpacity={0.7}
                                 >
                                     <Text className="text-white text-md ">‹</Text>
@@ -186,11 +187,10 @@ const QuestionList = ({sessionId,}: { sessionId: string; }) => {
                                 <TouchableOpacity
                                     onPress={handleNext}
                                     disabled={currentIndex === totalQuestions - 1}
-                                    className={`w-8 h-8 rounded-full items-center justify-center ${
-                                        currentIndex === totalQuestions - 1
+                                    className={`w-8 h-8 rounded-full items-center justify-center ${currentIndex === totalQuestions - 1
                                             ? 'bg-gray-700 opacity-30'
                                             : 'bg-gray-700'
-                                    }`}
+                                        }`}
                                     activeOpacity={0.7}
                                 >
                                     <Text className="text-gray-300 text-sm">›</Text>

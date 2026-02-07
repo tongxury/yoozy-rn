@@ -1,13 +1,14 @@
 import { Feather } from "@expo/vector-icons";
 import Video, { ResizeMode } from "react-native-video";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import { StatusBar, StyleSheet, TouchableOpacity, View, ActivityIndicator } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import React, { useState } from 'react';
 
 const VideoPage = () => {
     const { url } = useLocalSearchParams<{ url: string }>();
-    const router = useRouter();
+    const router = useXRoute();
     const insets = useSafeAreaInsets();
     const [isLoading, setIsLoading] = useState(true);
 
@@ -17,7 +18,7 @@ const VideoPage = () => {
 
     return (
         <View style={styles.container}>
-            <Stack.Screen options={{ headerShown: false, animation: 'slide_from_bottom', animationDuration: 200}} />
+            <Stack.Screen options={{ headerShown: false, animation: 'slide_from_bottom', animationDuration: 200 }} />
             <StatusBar hidden />
 
             <Video

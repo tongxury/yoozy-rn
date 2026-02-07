@@ -11,13 +11,14 @@ import {
   MaterialCommunityIcons,
   MaterialIcons
 } from "@expo/vector-icons";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { Stack } from "react-native-flex-layout";
 import { ScreenHeader } from "@/components/ScreenHeader";
 
 export default function MyScreen() {
+  const router = useXRoute();
   const { colors } = useTailwindVars();
 
   const { user, isLoading } = useAuthUser({ fetchImmediately: true });

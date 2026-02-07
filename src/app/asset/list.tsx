@@ -4,7 +4,7 @@ import { workflowConfig } from "@/consts";
 import useTailwindVars from "@/hooks/useTailwindVars";
 import { Feather } from "@expo/vector-icons";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useMemo } from "react";
 import {
     ActivityIndicator,
@@ -18,6 +18,7 @@ import Animated, { FadeInDown, Layout } from 'react-native-reanimated';
 const containerPadding = 16;
 
 const AssetList = () => {
+    const router = useXRoute();
     const { colors } = useTailwindVars();
 
     const {
@@ -46,7 +47,7 @@ const AssetList = () => {
         // Logic: If workflow exists and status is NOT completed, it is creating.
         const isCreating = item?.workflow?.status !== 'completed';
 
-        const workflowName = item.workflow?.name ;
+        const workflowName = item.workflow?.name;
         const workflowLabel = workflowConfig[workflowName]?.label;
 
         const iconUrl = item.commodity?.images?.[0];

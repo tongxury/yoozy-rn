@@ -1,7 +1,7 @@
 import CommodityInput from "@/components/CommodityInput";
 import Modal from "@/components/ui/Modal";
 import { useTranslation } from "@/i18n/translation";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import { useEffect, useRef } from "react";
 import { Animated, Text, View } from "react-native";
 
@@ -13,6 +13,7 @@ export default function Starter(
         visible?: boolean;
         onClose?: () => void;
     }) {
+    const router = useXRoute();
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
 

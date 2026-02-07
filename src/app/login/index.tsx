@@ -9,7 +9,7 @@ import {
 } from "@/reactQuery/user";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -33,6 +33,7 @@ type LoginType = "email" | "phone";
 
 export default function LoginScreen() {
   const insets = useSafeAreaInsets();
+  const router = useXRoute();
   const [loginType, setLoginType] = useState<LoginType>("phone");
   const [countdown, setCountdown] = useState(0);
   const [isAgreed, setIsAgreed] = useState(false);
@@ -313,16 +314,16 @@ export default function LoginScreen() {
                           : !isPhoneValid() || countdown > 0
                       }
                       className={`px-5 h-14 rounded-2xl items-center justify-center ${(loginType === "email" ? isEmailValid() : isPhoneValid()) && countdown === 0
-                          ? "bg-primary"
-                          : "bg-primary/20"
+                        ? "bg-primary"
+                        : "bg-primary/20"
                         }`}
                     >
                       {isSendCodePending ? (
                         <ActivityIndicator color={colors.card} size="small" />
                       ) : (
                         <Text className={`font-bold ${(loginType === "email" ? isEmailValid() : isPhoneValid()) && countdown === 0
-                            ? "text-white"
-                            : "text-primary"
+                          ? "text-white"
+                          : "text-primary"
                           }`}>
                           {countdown > 0
                             ? `${countdown}s`

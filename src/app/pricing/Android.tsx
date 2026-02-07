@@ -1,16 +1,16 @@
 import Meta from "./Meta";
-import {initialize, presentCardPaymentFlow, presentEntirePaymentFlow} from 'airwallex-payment-react-native';
-import {useEffect, useState} from "react";
-import {fetchPaymentIntent} from "@/api/payment";
-import {Alert} from "react-native";
-import {useTranslation} from "@/i18n/translation";
-import {useRouter} from "expo-router";
+import { initialize, presentCardPaymentFlow, presentEntirePaymentFlow } from 'airwallex-payment-react-native';
+import { useEffect, useState } from "react";
+import { fetchPaymentIntent } from "@/api/payment";
+import { Alert } from "react-native";
+import { useTranslation } from "@/i18n/translation";
+import useXRoute from "@/hooks/useRoute";
 
 const Android = () => {
 
-    const router = useRouter()
+    const router = useXRoute()
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const [payStart, setPayStart] = useState<number>();
 
     useEffect(() => {
@@ -21,9 +21,9 @@ const Android = () => {
     const submit = async (plan: any) => {
         setPayStart(Date.now());
 
-        const pi = await fetchPaymentIntent({planId: plan?.id})
+        const pi = await fetchPaymentIntent({ planId: plan?.id })
 
-        const {clientSecret, amount, id, currency, mode, countryCode} = pi?.data?.data || {}
+        const { clientSecret, amount, id, currency, mode, countryCode } = pi?.data?.data || {}
 
         console.log('pi', pi.data)
 
@@ -46,8 +46,8 @@ const Android = () => {
 
                 Alert.alert(t(`payment.confirmTitle`), "",
                     [
-                        {text: t(`payment.confirmCancel`), onPress: () => router.back()},
-                        {text: t(`payment.confirmSuccess`), onPress: () => router.back()},
+                        { text: t(`payment.confirmCancel`), onPress: () => router.back() },
+                        { text: t(`payment.confirmSuccess`), onPress: () => router.back() },
                     ])
 
                 console.log(result);
@@ -64,7 +64,7 @@ const Android = () => {
 
     }
 
-    return <Meta onSubmit={submit} payStart={payStart}/>
+    return <Meta onSubmit={submit} payStart={payStart} />
 }
 
 export default Android;

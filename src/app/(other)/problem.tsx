@@ -2,7 +2,7 @@ import ScreenContainer from "@/components/ScreenContainer";
 import { useConsecutiveClicks } from "@/hooks/useConsecutiveClicks";
 import { useTranslation } from "@/i18n/translation";
 import { AntDesign } from "@expo/vector-icons";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useState } from "react";
 import {
   Pressable,
@@ -41,6 +41,7 @@ const faqs: FAQ[] = [
 ];
 
 export default function ProblemScreen() {
+  const router = useXRoute();
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
   const { t } = useTranslation();
 

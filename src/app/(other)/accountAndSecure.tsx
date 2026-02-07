@@ -7,10 +7,11 @@ import ScreenContainer from "@/components/ScreenContainer";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { useTranslation } from "@/i18n/translation";
 import { clearAuthToken } from "@/utils";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import { Stack } from "react-native-flex-layout";
 
 export default function Screen() {
+  const router = useXRoute();
   const { colors } = useTailwindVars();
 
   const { t } = useTranslation();

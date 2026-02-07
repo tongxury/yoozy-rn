@@ -4,7 +4,6 @@ import ScreenContainer from "@/components/ScreenContainer";
 import { ScreenHeader } from "@/components/ScreenHeader";
 import useTailwindVars from "@/hooks/useTailwindVars";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
-import { router } from "expo-router";
 import React, { useState } from "react";
 import {
   Text,
@@ -36,11 +35,11 @@ export default function HomeScreen() {
     <ScreenContainer edges={['top']} >
       {/* Premium Header Area - Clean & Spacious */}
 
-    <ScreenHeader title={'灵感库'}  closeable={false}/>
+      <ScreenHeader title={'灵感库'} closeable={false} />
 
       {/* Content Area */}
       <View className="flex-1">
-          <InspirationList />
+        <InspirationList />
       </View>
     </ScreenContainer>
   );

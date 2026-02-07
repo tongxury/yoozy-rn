@@ -2,7 +2,7 @@ import { listItems } from "@/api/resource";
 import useTailwindVars from "@/hooks/useTailwindVars";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useQuery } from "@tanstack/react-query";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 import React, { useMemo, useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 
@@ -13,6 +13,7 @@ interface TemplateSelectProps {
 }
 
 const TemplateSelect = ({ session, pendingTemplate, onSelect }: TemplateSelectProps) => {
+    const router = useXRoute();
     const { colors } = useTailwindVars();
     // const [selectedTemplateId, setSelectedTemplateId] = useState<string | null>(null);
     const [searchKeyword, setSearchKeyword] = useState("");

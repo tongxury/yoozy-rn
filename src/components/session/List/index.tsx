@@ -11,12 +11,13 @@ import React, { useMemo, useCallback } from "react";
 import useDateFormatter from "@/hooks/useDateFormatter";
 import { SkeletonLoader } from "@/components/ui/SkeletonLoader";
 import { listSessions } from "@/api/session";
-import { router } from "expo-router";
+import useXRoute from "@/hooks/useRoute";
 
 const CARD_BASE =
   "mx-4 mb-4 rounded-3xl overflow-hidden bg-background bg-surface shadow-soft";
 
 function SessionList() {
+  const router = useXRoute();
   const { formatToNow } = useDateFormatter();
 
   const {

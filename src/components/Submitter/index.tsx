@@ -1,16 +1,16 @@
-import {StyleProp, ViewStyle} from "react-native";
-import {Resource} from "@/types";
-import React, {useState} from "react";
-import {router} from "expo-router";
+import { StyleProp, ViewStyle } from "react-native";
+import { Resource } from "@/types";
+import React, { useState } from "react";
+import useXRoute from "@/hooks/useRoute";
 import Button from "@/components/ui/Button";
-import {HStack} from "react-native-flex-layout";
-import {isImage, isVideo, packPersonalAccountResource,} from "@/utils/resource";
-import {useAccounts} from "@/hooks/useAccounts";
-import {useTranslation} from "@/i18n/translation";
-import {performSingleUpload} from "@/utils/upload";
-import {addQuestion, addSessionV3} from "@/api/api";
+import { HStack } from "react-native-flex-layout";
+import { isImage, isVideo, packPersonalAccountResource, } from "@/utils/resource";
+import { useAccounts } from "@/hooks/useAccounts";
+import { useTranslation } from "@/i18n/translation";
+import { performSingleUpload } from "@/utils/upload";
+import { addQuestion, addSessionV3 } from "@/api/api";
 import * as VideoThumbnails from "expo-video-thumbnails";
-import {RNFile} from "@/utils/upload/utils";
+import { RNFile } from "@/utils/upload/utils";
 import SubmitButton from "@/components/Submitter/SubmitButton";
 import WaitingModal from "@/components/Submitter/Waiting";
 import DefaultAccount from "@/components/DefaultAccount";
@@ -27,16 +27,17 @@ interface SubmitterProps {
 }
 
 const Submitter = ({
-                       sessionId,
-                       promptId,
-                       scene,
-                       resources,
-                       onComplete,
-                       accountRequired,
-                       style,
-                   }: SubmitterProps) => {
+    sessionId,
+    promptId,
+    scene,
+    resources,
+    onComplete,
+    accountRequired,
+    style,
+}: SubmitterProps) => {
+    const router = useXRoute();
     const [submitting, setSubmitting] = useState(false);
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     const [uploadProgress, setUploadProgress] = useState(10);
 
@@ -52,14 +53,14 @@ const Submitter = ({
         setSubmitting(false);
     }
 
-    const {defaultAccount} = useAccounts();
+    const { defaultAccount } = useAccounts();
 
     useInterval(() => {
         console.log('useInterval')
         setUploadProgress(prevState => {
             return prevState >= 100 ? prevState : prevState + 1;
         });
-    }, 1000, {enabled: submitting})
+    }, 1000, { enabled: submitting })
 
 
     const onSubmit = async () => {
@@ -130,7 +131,7 @@ const Submitter = ({
 
         const qr = await addQuestion({
             sessionId,
-            prompt: {id: promptId},
+            prompt: { id: promptId },
             scene: scene,
         });
 
@@ -164,13 +165,13 @@ const Submitter = ({
                 style={[style]}
                 items={"center"}
             >
-                <DefaultAccount/>
+                <DefaultAccount />
                 <SubmitButton
                     onSubmit={onSubmit}
                     promptId={promptId}
                     disabled={submitting || !resources?.length}
                 />
-                <WaitingModal visible={submitting} progress={uploadProgress}  onRetry={onRetry}/>
+                <WaitingModal visible={submitting} progress={uploadProgress} onRetry={onRetry} />
             </HStack>
         );
     }
@@ -186,7 +187,7 @@ const Submitter = ({
                 promptId={promptId}
                 disabled={submitting || !resources?.length}
             />
-            <WaitingModal visible={submitting} progress={uploadProgress} onRetry={onRetry}/>
+            <WaitingModal visible={submitting} progress={uploadProgress} onRetry={onRetry} />
         </HStack>
     );
 };

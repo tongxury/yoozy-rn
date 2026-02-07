@@ -1,10 +1,11 @@
 import ScreenContainer from "@/components/ScreenContainer";
 import { ScreenHeader } from "@/components/ScreenHeader";
+import useXRoute from "@/hooks/useRoute";
 import useTailwindVars from "@/hooks/useTailwindVars";
 
 import { useTranslation } from "@/i18n/translation";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+// import { router } from "expo-router";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
@@ -83,42 +84,44 @@ function FeatureItem({
 
 // 主功能项组件 (放在最底部，样式更显眼)
 function MainFeatureItem({
-    item,
-    onPress,
-  }: {
-    item: (typeof FEATURE_ITEMS)[0];
-    onPress: () => void;
-  }) {
-    return (
-      <View className="px-5 mt-4">
-        <TouchableOpacity
-          onPress={onPress}
-          activeOpacity={0.8}
-          className="bg-card rounded-[24px] p-5 flex-row items-center justify-between border border-muted/50"
-        >
-          <View className="flex-row items-center flex-1">
-            <View className="bg-primary/10 rounded-2xl p-3 mr-4">
-              <Ionicons name={item.icon as any} size={26} color="#A855F7" />
-            </View>
-            <View className="flex-1">
-              <Text className="text-foreground text-lg font-bold mb-1">{item.title}</Text>
-              {item.subtitle && (
-                  <Text className="text-muted-foreground text-xs font-medium">{item.subtitle}</Text>
-              )}
-            </View>
+  item,
+  onPress,
+}: {
+  item: (typeof FEATURE_ITEMS)[0];
+  onPress: () => void;
+}) {
+  return (
+    <View className="px-5 mt-4">
+      <TouchableOpacity
+        onPress={onPress}
+        activeOpacity={0.8}
+        className="bg-card rounded-[24px] p-5 flex-row items-center justify-between border border-muted/50"
+      >
+        <View className="flex-row items-center flex-1">
+          <View className="bg-primary/10 rounded-2xl p-3 mr-4">
+            <Ionicons name={item.icon as any} size={26} color="#A855F7" />
           </View>
-          <Ionicons name="chevron-forward" size={20} color="#CBD5E1" />
-        </TouchableOpacity>
-      </View>
-    );
-  }
+          <View className="flex-1">
+            <Text className="text-foreground text-lg font-bold mb-1">{item.title}</Text>
+            {item.subtitle && (
+              <Text className="text-muted-foreground text-xs font-medium">{item.subtitle}</Text>
+            )}
+          </View>
+        </View>
+        <Ionicons name="chevron-forward" size={20} color="#CBD5E1" />
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 export default function Screen() {
   const { t } = useTranslation();
   const { colors } = useTailwindVars();
 
+  const { routeTo } = useXRoute()
+
   const handleFeaturePress = (route: string) => {
-    router.navigate(route as any);
+    routeTo(route);
   };
 
   // 整个列表从底部向上展示，数组中第一个（index 0）使用 Main UI
@@ -132,7 +135,7 @@ export default function Screen() {
         {reversedItems.map((item) => {
           // 找到该项在原数组中的索引
           const originalIndex = FEATURE_ITEMS.findIndex(f => f.id === item.id);
-          
+
           if (originalIndex === 0) {
             return (
               <MainFeatureItem
@@ -142,7 +145,7 @@ export default function Screen() {
               />
             );
           }
-          
+
           return (
             <FeatureItem
               key={item.id}
