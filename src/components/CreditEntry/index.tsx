@@ -22,7 +22,7 @@ const CreditEntry = () => {
         <Text className="text-sm ml-1.5">{credit?.balance}</Text>
       </View>
       <TouchableOpacity activeOpacity={0.6}>
-        <Text className="text-sm" >开会员</Text>
+        {/* <Text className="text-sm" >开会员</Text> */}
       </TouchableOpacity>
     </View>
   );

@@ -211,176 +211,20 @@ function RootLayoutNav() {
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      {/* <View
-        style={{
-          flex: 1,
-          backgroundColor: colors.background,
-        }}
-      > */}
-      {/*<OngoingQuestion/>*/}
-      {/* <StatusBar
-          // Default status bar style, pages can override
-          barStyle={isDarkMode ? "light-content" : "dark-content"}
-          backgroundColor="transparent"
-          translucent={true}
-        /> */}
       <Stack
         screenOptions={{
           headerShown: false,
-          // headerStyle: {
-          //   backgroundColor: colors.background,
-          // },
-          // headerTintColor: grey0,
-          // headerLeft: ({ canGoBack }) =>
-          //   canGoBack ? (
-          //     <TouchableOpacity
-          //       onPress={() => {
-          //         router.back();
-          //       }}
-          //       style={{
-          //         // width: 20,
-          //         // height: 20,
-          //         justifyContent: "center",
-          //         alignItems: "center",
-          //         marginLeft: Platform.OS === "ios" ? 0 : 8,
-          //       }}
-          //       hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          //     >
-          //       <Feather name="arrow-left" size={24} color={grey0} />
-          //     </TouchableOpacity>
-          //   ) : null,
-          // contentStyle: {
-          //   backgroundColor: colors.background,
-          // }
         }}
       >
-        {/* <Stack.Screen
-            name="(tabs)"
-            options={{
-              headerShown: false,
-            }}
-          /> */}
-
-        {/* <Stack.Screen
-            name="session/starter"
-            options={{
-              headerShown: false,
-              animation: "fade",
-              animationDuration: 1,
-            }}
-          /> */}
-        {/* <Stack.Screen
-            name="session/[id]/index"
-            options={{
-              headerShown: false,
-              animation: "fade",
-              animationDuration: 1,
-            }}
-          /> */}
-        {/* <Stack.Screen
-            name="commodity/[id]"
-            options={{
-              headerTitle: "商品详情",
-            }}
-          /> */}
-        {/* <Stack.Screen
-            name="commodity/create"
-            options={{
-              headerTitle: "添加商品",
-            }}
-          />
-          <Stack.Screen
-            name="inspiration/[id]"
-            options={{
-              headerShown: false,
-            }}
-          /> */}
-
-        {/* <Stack.Screen
-            name="template/[id]"
-            options={{
-              title: t("details"),
-            }}
-          />
-          <Stack.Screen
-            name="settings/index"
-            // @ts-ignore
-            options={({ navigation }) => ({
-              // headerShown: false,
-              title: null,
-            })}
-          /> */}
-        {/* <Stack.Screen
-            name="user/me"
-            options={({ navigation }) => ({
-              headerTitle: t("user.profile"),
-            })}
-          />
-
-          <Stack.Screen
-            name="login"
-            options={{
-              headerShown: false,
-              animation: "slide_from_bottom",
-            }}
-          /> */}
-
-        {/* <Stack.Screen
-            name="(other)/accountAndSecure"
-            options={{
-              title: t("accountAndSecure"),
-            }}
-          />
-          <Stack.Screen
-            name="(other)/deleteAccount"
-            options={{
-              title: t("deleteAccount"),
-            }}
-          />
-          <Stack.Screen
-            name="(other)/community"
-            options={{
-              title: t("creatorCommunity"),
-            }}
-          />
-          <Stack.Screen
-            name="(other)/sub_terms"
-            options={{
-              title: t("subTerms"),
-            }}
-          />
-          <Stack.Screen
-            name="(other)/contact"
-            options={{
-              title: t("contactUs"),
-            }}
-          />
-          <Stack.Screen
-            name="(other)/problem"
-            options={{
-              title: t("faq"),
-            }}
-          />
-          <Stack.Screen
-            name="(other)/privacy"
-            options={{
-              title: t("privacyPolicy"),
-            }}
-          />
-          <Stack.Screen
-            name="(other)/terms"
-            options={{
-              title: t("serviceTerms"),
-            }}
-          />
-          <Stack.Screen
-            name="(other)/about"
-            options={{
-              title: t("aboutUs"),
-            }}
-          /> */}
+        <Stack.Screen
+          name="login"
+          options={{
+            headerShown: false,
+            presentation: "modal",
+            gestureEnabled: true,
+          }}
+        />
       </Stack>
-      {/* </View> */}
     </ErrorBoundary>
   );
 }

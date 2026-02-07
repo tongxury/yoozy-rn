@@ -28,6 +28,7 @@ import { Toast } from "react-native-toast-notifications";
 import { z } from "zod";
 import Error from "@/components/RormValidationError";
 import { useAuthUser } from "@/hooks/useAuthUser";
+import ScreenContainer from "@/components/ScreenContainer";
 
 type LoginType = "email" | "phone";
 
@@ -203,7 +204,11 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <ScreenContainer
+      stackScreenProps={{
+        animation: "fade_from_bottom",
+        animationDuration: 100,
+      }} >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         className="flex-1"
@@ -388,6 +393,6 @@ export default function LoginScreen() {
           )} */}
         </ScrollView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </ScreenContainer>
   );
 }
