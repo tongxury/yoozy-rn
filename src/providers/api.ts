@@ -59,6 +59,11 @@ instance.interceptors.response.use(
     } else {
       switch (response.data?.code) {
         case "UNAUTHORIZED":
+
+          if (response.config.method !== "get") {
+            router.replace("/login");
+          }
+
           return Promise.reject(response.data.message || response.data.code);
 
       }

@@ -194,7 +194,7 @@ function RootLayoutNav() {
               />
             </View>
 
-            <View className="items-center">
+            {/* <View className="items-center">
               <Text
                 className="text-3xl font-black tracking-tighter mb-2"
                 style={{ color: colors.foreground }}
@@ -202,7 +202,7 @@ function RootLayoutNav() {
                 YOOZY
               </Text>
 
-            </View>
+            </View> */}
           </View>
         </SafeAreaView>
       </ErrorBoundary>

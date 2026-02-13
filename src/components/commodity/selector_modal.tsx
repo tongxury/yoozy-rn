@@ -41,6 +41,7 @@ const CommoditySelector = ({ visible, onClose, onSelect }: CommoditySelectorDraw
                 <Selector
                     value={null}
                     onChange={handleSelect}
+                    onCreate={onClose}
                 />
             </View>
         </Modal>

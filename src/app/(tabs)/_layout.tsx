@@ -34,10 +34,10 @@ function CustomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
           const isFocused = state.index === index;
 
           const onPress = async () => {
-            if (route.name === "record" && !user) {
-              router.navigate("/login");
-              return;
-            }
+            // if (route.name === "record" && !user) {
+            //   router.navigate("/login");
+            //   return;
+            // }
 
             const event = navigation.emit({
               type: "tabPress",

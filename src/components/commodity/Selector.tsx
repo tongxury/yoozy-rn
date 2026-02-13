@@ -24,7 +24,7 @@ const cardGap = 12;
 const containerPadding = 16;
 const cardWidth = (screenWidth - (containerPadding * 2) - cardGap) / columnCount;
 
-const CommoditySelector = ({ value, onChange }: { value: any, onChange: (value: any) => void }) => {
+const CommoditySelector = ({ value, onChange, onCreate }: { value: any, onChange: (value: any) => void, onCreate?: () => void }) => {
     const router = useXRoute();
     const { colors } = useTailwindVars();
     const [queryKeyword, setQueryKeyword] = useState("");
@@ -177,7 +177,7 @@ const CommoditySelector = ({ value, onChange }: { value: any, onChange: (value: 
                         clearButtonMode="while-editing"
                     />
                 </View>
-                <TouchableOpacity onPress={() => router.push("/commodity/create")} activeOpacity={0.7} style={{ padding: 4 }}>
+                <TouchableOpacity onPress={() => { onCreate?.(); router.push("/commodity/create"); }} activeOpacity={0.7} style={{ padding: 4 }}>
                     <Text className="text-sm font-bold" style={{ color: colors.primary }}>去创建</Text>
                 </TouchableOpacity>
             </View>
